@@ -1,16 +1,21 @@
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import { OutlinedInput } from '@mui/material';
+import { FormLabel, OutlinedInput } from '@mui/material';
+import FormGrid from './FormGrid';
 
-export default function AutoComplete() {
+export default function AutoComplete({ label }) {
   return (
-    <Autocomplete
-      options={countries}
-      disablePortal
-      disableCloseOnSelect
-      getOptionLabel={(option) => `${option.label} (${option.code}) +${option.phone}`}
-      renderInput={(params) => <OutlinedInput {...params} placeholder="Choose a country" />}
-    />
+    <FormGrid size={{ xs: 12, md: 6 }}>
+      <FormLabel htmlFor={name} required>
+        {label}
+      </FormLabel>
+      <Autocomplete
+        options={countries}
+        disablePortal
+        getOptionLabel={(option) => `${option.label} (${option.code}) +${option.phone}`}
+        renderInput={(params) => <TextField {...params} placeholder="Choose a country" />}
+      />
+    </FormGrid>
   );
 }
 const countries = [

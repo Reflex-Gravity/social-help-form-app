@@ -6,6 +6,11 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { StyledEngineProvider } from '@mui/material/styles';
 import GlobalStyles from '@mui/material/GlobalStyles';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
 import './i18n';
 import App from './App.jsx';
 import store from './app/store.js';
@@ -19,10 +24,12 @@ createRoot(document.getElementById('root')).render(
       <GlobalStyles styles="@layer theme, base, mui, components, utilities;" />
       <Provider store={store}>
         <AppTheme>
-          <CssBaseline />
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <CssBaseline />
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </LocalizationProvider>
         </AppTheme>
       </Provider>
       {/* Your app */}
