@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { lazy, useState } from 'react';
 import { useForm, Controller, FormProvider } from 'react-hook-form';
 import {
   Alert,
@@ -21,35 +21,33 @@ import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import { AppContext } from '../context/context.js';
-import Stepper from './social-form/components/Stepper.jsx';
-import FormField from '../components/FormInput.jsx';
-import AutoComplete from '../components/AutoComplete.jsx';
-import PersonalInfoForm from './social-form/components/PersonalInfoForm.jsx';
-import PaymentForm from './social-form/components/PaymentForm.jsx';
-import Review from './social-form/components/Review.jsx';
+import Stepper from '../components/Stepper.jsx';
+import SuspenseWrapper from '../components/SuspenseWrapper.jsx';
 import schema from './form-schema.js';
 import ErrorBoundary from '../components/ErrorBoundary.jsx';
+import { useFormPersist } from '../hooks/useFormPersist.jsx';
+import ErrorAlert from './social-form/components/ErrorAlert.jsx';
+
+const SituationDescriptionsForm = lazy(
+  () => import('./social-form/components/SituationDescriptionsForm.jsx'),
+);
+const PersonalInfoForm = lazy(() => import('./social-form/components/PersonalInfoForm.jsx'));
+const FamilyFinancialInfoForm = lazy(
+  () => import('./social-form/components/FamilyFinancialInfoForm.jsx'),
+);
 
 function getStepContent(step) {
   switch (step) {
     case 0:
       return <PersonalInfoForm />;
-
     case 1:
-      return <PaymentForm />;
+      return <FamilyFinancialInfoForm />;
     case 2:
-      return <Review />;
+      return <SituationDescriptionsForm />;
     default:
       throw new Error('Unknown step');
   }
 }
-
-const countries = [
-  { code: 'IN', name: 'India' },
-  { code: 'US', name: 'United States' },
-  { code: 'DE', name: 'Germany' },
-];
 
 export default function FormPage() {
   const theme = useTheme();
@@ -69,6 +67,8 @@ export default function FormPage() {
 
   const { reset, handleSubmit } = form;
 
+  useFormPersist('social-form', form.watch, form.setValue);
+
   const onSubmit = handleSubmit(async () => {
     setSubmitted(false);
     setLoading(true);
@@ -87,8 +87,11 @@ export default function FormPage() {
     }
   });
 
-  const handleNext = () => {
-    setActiveStep(activeStep + 1);
+  const handleNext = async () => {
+    const isValid = await form.trigger(); // validates all fields
+    if (isValid) {
+      setActiveStep(activeStep + 1);
+    }
   };
   const handleBack = () => {
     setActiveStep(activeStep - 1);
@@ -106,9 +109,12 @@ export default function FormPage() {
 
       <Paper className="p-4" elevation={0}>
         <FormProvider {...form}>
+          <ErrorAlert />
           <form onSubmit={onSubmit} className="grid gap-4">
             <Grid container direction={'column'} spacing={3}>
-              <ErrorBoundary>{getStepContent(activeStep)}</ErrorBoundary>
+              <ErrorBoundary>
+                <SuspenseWrapper>{getStepContent(activeStep)}</SuspenseWrapper>
+              </ErrorBoundary>
               <Box
                 sx={[
                   {

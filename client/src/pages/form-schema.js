@@ -9,6 +9,7 @@ const schema = yup.object().shape({
     // matches: regex.email,
     matchesMessage: 'Please enter a valid Gmail address',
   }),
+  name: yup.string().required(),
   password: yup.string('Password', {
     required: true,
     min: 8,

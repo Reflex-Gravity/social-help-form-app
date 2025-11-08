@@ -1,7 +1,7 @@
 import { Box, Step, StepLabel, Stepper } from '@mui/material';
 import React from 'react';
 
-const steps = ['Shipping address', 'Payment details', 'Review your order'];
+const steps = ['Personal Information', 'Family & Financial Info', 'Situation Descriptions'];
 
 function StepperWrapper({ activeStep }) {
   return (

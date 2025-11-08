@@ -16,7 +16,7 @@ function PersonalInfoForm() {
   const { t } = useTranslation();
   return (
     <Grid container spacing={3}>
-      <FormInput name="name" label={t('form.name')} placeholder="Name" />
+      <FormInput name="name" label={t('form.name')} />
       <FormInput name="nationalId" label={t('form.nationalId')} />
       <FormDateInput name="dob" label={t('form.dob')} datePickerProps={{ disableFuture: true }} />
       <FormSelectInput name="gender" label={t('form.gender')} options={genderOptions} />
