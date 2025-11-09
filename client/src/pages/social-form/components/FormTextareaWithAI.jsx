@@ -8,11 +8,14 @@ import {
   TextareaAutosize,
   Box,
   CircularProgress,
+  Typography,
 } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import FormTextareaInput from '../../../components/FormTextAreaInput';
 import { generateDescription } from '../api/socialform.api';
+import { useTranslation } from 'react-i18next';
+import i18n from '../../../i18n';
 
 /**
  * @param {{
@@ -26,6 +29,7 @@ import { generateDescription } from '../api/socialform.api';
  * }} props
  */
 function FormTextareaWithAI({ label, name, placeholder, minRows, maxRows, textareaProps }) {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [generatedContent, setGeneratedContent] = useState('');
   const [editedContent, setEditedContent] = useState('');
@@ -35,7 +39,7 @@ function FormTextareaWithAI({ label, name, placeholder, minRows, maxRows, textar
   const handleGenerate = useCallback(async () => {
     setLoading(true);
     try {
-      const content = await generateDescription({ field: label });
+      const content = await generateDescription({ field: label, lang: i18n.language });
       setGeneratedContent(content);
       setEditedContent(content);
       setOpen(true);
@@ -72,7 +76,7 @@ function FormTextareaWithAI({ label, name, placeholder, minRows, maxRows, textar
             onClick={handleGenerate}
             disabled={loading}
           >
-            {loading ? 'Generating...' : 'Help Me Write'}
+            {loading ? t('form.generating') : t('form.helpMeWrite')}
           </Button>
         }
         maxRows={maxRows}
@@ -80,7 +84,7 @@ function FormTextareaWithAI({ label, name, placeholder, minRows, maxRows, textar
       />
 
       <Dialog open={open} onClose={handleDiscard} maxWidth="md" fullWidth>
-        <DialogTitle>AI Generated Content</DialogTitle>
+        <DialogTitle>label</DialogTitle>
         <DialogContent>
           <TextareaAutosize
             value={editedContent}
@@ -99,13 +103,10 @@ function FormTextareaWithAI({ label, name, placeholder, minRows, maxRows, textar
         </DialogContent>
         <DialogActions>
           <Button onClick={handleDiscard} color="error">
-            Discard
-          </Button>
-          <Button onClick={() => setEditedContent(generatedContent)} variant="outlined">
-            Reset to Original
+            {t('form.discard')}
           </Button>
           <Button onClick={handleAccept} variant="contained">
-            Accept
+            {t('form.accept')}
           </Button>
         </DialogActions>
       </Dialog>

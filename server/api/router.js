@@ -15,6 +15,7 @@ router.use('/health', async (req, res) => {
 router.post('/generate', async (req, res) => {
   try {
     const userMessage = req.body.prompt;
+    const lang = req.body.lang;
 
     const completion = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
@@ -23,7 +24,9 @@ router.post('/generate', async (req, res) => {
       messages: [
         {
           role: 'system',
-          content: 'I am unemployed with no income. Help me describe my financial hardship.',
+          content: `I am unemployed with no income. Help me describe my financial hardship.
+          Use language: ${lang}
+          `,
         },
         { role: 'user', content: userMessage },
       ],

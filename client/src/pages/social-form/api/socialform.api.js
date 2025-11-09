@@ -5,11 +5,11 @@ import { showNotification } from '../../../store/notificationSlice';
 
 const API_BASE = import.meta.env.DEV ? 'http://localhost:3000' : '';
 
-export async function generateDescription({ field }) {
+export async function generateDescription({ field, lang }) {
   try {
     const url = `${API_BASE}/api/generate`;
 
-    const response = await fetchController(url, { data: { prompt: field } });
+    const response = await fetchController(url, { data: { prompt: field, lang } });
 
     if (response.status === 'success' && typeof response.message === 'string') {
       return response.message;

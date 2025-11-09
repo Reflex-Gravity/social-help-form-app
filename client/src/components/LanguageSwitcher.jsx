@@ -5,7 +5,10 @@ export default function LanguageSwitcher() {
   const { i18n, t } = useTranslation();
 
   const toggle = () => {
-    const next = i18n.language === 'en' ? 'hi' : 'en';
+    const next = i18n.language === 'en' ? 'ar' : 'en';
+    document.documentElement.dir = next === 'ar' ? 'rtl' : 'ltr';
+    localStorage.setItem('lang', next);
+
     i18n.changeLanguage(next);
   };
 
