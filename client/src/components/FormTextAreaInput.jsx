@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormLabel, TextareaAutosize, FormHelperText } from '@mui/material';
+import { FormLabel, TextareaAutosize, FormHelperText, Box } from '@mui/material';
 import { useFormContext, Controller } from 'react-hook-form';
 import FormGrid from './FormGrid';
 import { useTranslation } from 'react-i18next';
@@ -14,7 +14,15 @@ import { useTranslation } from 'react-i18next';
  *   textareaProps?: React.ComponentProps<typeof TextareaAutosize>
  * }} props
  */
-function FormTextareaInput({ label, name, placeholder, minRows = 3, maxRows = 10, textareaProps }) {
+function FormTextareaInput({
+  label,
+  name,
+  placeholder,
+  minRows = 3,
+  maxRows = 10,
+  textareaProps,
+  aiButton,
+}) {
   const { t } = useTranslation();
   const {
     control,
@@ -23,9 +31,12 @@ function FormTextareaInput({ label, name, placeholder, minRows = 3, maxRows = 10
 
   return (
     <FormGrid size={{ xs: 12 }}>
-      <FormLabel htmlFor={name} required>
-        {label}
-      </FormLabel>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <FormLabel htmlFor={name} required>
+          {label}
+        </FormLabel>
+        {aiButton}
+      </Box>
       <Controller
         name={name}
         control={control}

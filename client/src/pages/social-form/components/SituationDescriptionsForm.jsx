@@ -3,20 +3,32 @@ import FormInput from '../../../components/FormInput';
 import { useTranslation } from 'react-i18next';
 import { Grid } from '@mui/material';
 import FormTextareaInput from '../../../components/FormTextAreaInput';
+import FormTextareaWithAI from './FormTextareaWithAI';
 
 function SituationDescriptionsForm() {
   const { t } = useTranslation();
   return (
     <Grid container spacing={3}>
-      <FormTextareaInput
+      <FormTextareaWithAI
         name="currentFinancialSituation"
         label={t('form.currentFinancialSituation')}
       />
-      <FormTextareaInput
+      <FormTextareaWithAI
         name="employementCircumstances"
         label={t('form.employementCircumstances')}
       />
-      <FormTextareaInput name="reason" label={t('form.reason')} />
+      <FormTextareaWithAI name="reason" label={t('form.reason')} />
+      {/* <FormTextareaWithAI
+        name="description"
+        label="Description"
+        placeholder="Enter description..."
+        onGenerateAI={async () => {
+          // Your AI generation logic
+          const response = await fetch('/api/generate', { method: 'POST' });
+          const data = await response.json();
+          return data.content;
+        }}
+      /> */}
     </Grid>
   );
 }

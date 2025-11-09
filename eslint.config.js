@@ -3,7 +3,7 @@ import myconfig from './client/eslint.config.js';
 
 export default defineConfig([
   {
-    files: ['**/*.{js,jsx}'],
+    files: ['./client/**/*.{js,jsx}'],
     extends: [myconfig],
   },
 ]);

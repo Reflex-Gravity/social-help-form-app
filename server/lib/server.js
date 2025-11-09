@@ -4,7 +4,7 @@ const parser = require('body-parser');
 const xss = require('xss-clean');
 const cors = require('./cors');
 const Database = require('./db');
-const routes = require('./api/router');
+const routes = require('../api/router');
 
 class Server {
   app = null;
@@ -21,6 +21,7 @@ class Server {
     this.app.set('port', process.env.SERVER_PORT || 3000);
     this.app.use(cors);
     this.app.use(xss());
+    this.app.use(express.json());
     this.app.use(logger('dev'));
     this.app.use(parser.urlencoded({ extended: false }));
   }

@@ -27,7 +27,7 @@ import SuspenseWrapper from '../components/SuspenseWrapper.jsx';
 import ErrorBoundary from '../components/ErrorBoundary.jsx';
 import { useFormPersist } from '../hooks/useFormPersist.jsx';
 import ErrorAlert from './social-form/components/ErrorAlert.jsx';
-import formSchema from './social-form/useSocialFormSchema.js';
+import useSocialFormSchema from './social-form/useSocialFormSchema.js';
 
 const SituationDescriptionsForm = lazy(
   () => import('./social-form/components/SituationDescriptionsForm.jsx'),
@@ -56,6 +56,7 @@ export default function FormPage() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
+  const formSchema = useSocialFormSchema();
 
   const form = useForm({
     resolver: yupResolver(formSchema[activeStep]), // attach defined schema here
