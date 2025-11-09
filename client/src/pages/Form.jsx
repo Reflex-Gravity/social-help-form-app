@@ -1,9 +1,10 @@
-import { lazy, useState } from 'react';
+import { lazy, useCallback, useState } from 'react';
 import { useForm, Controller, FormProvider } from 'react-hook-form';
 import {
   Alert,
   Box,
   Button,
+  CircularProgress,
   FormLabel,
   Grid,
   MenuItem,
@@ -23,10 +24,10 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import Stepper from '../components/Stepper.jsx';
 import SuspenseWrapper from '../components/SuspenseWrapper.jsx';
-import schema from './form-schema.js';
 import ErrorBoundary from '../components/ErrorBoundary.jsx';
 import { useFormPersist } from '../hooks/useFormPersist.jsx';
 import ErrorAlert from './social-form/components/ErrorAlert.jsx';
+import formSchema from './social-form/useSocialFormSchema.js';
 
 const SituationDescriptionsForm = lazy(
   () => import('./social-form/components/SituationDescriptionsForm.jsx'),
@@ -55,13 +56,29 @@ export default function FormPage() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
-  const form = useForm({
-    resolver: yupResolver(schema), // attach defined schema here
 
+  const form = useForm({
+    resolver: yupResolver(formSchema[activeStep]), // attach defined schema here
+    mode: 'onBlur',
     defaultValues: {
       name: '',
       email: '',
       country: '',
+      gender: '',
+      address: '',
+      city: '',
+      dob: '',
+      nationalId: '',
+      phone: '',
+      state: '',
+      maritalStatus: '',
+      dependants: '',
+      employmentStatus: '',
+      monthlyIncome: '',
+      housingStatus: '',
+      currentFinancialSituation: '',
+      employementCircumstances: '',
+      reason: '',
     },
   });
 
@@ -97,6 +114,11 @@ export default function FormPage() {
     setActiveStep(activeStep - 1);
   };
 
+  const handleReset = useCallback(() => {
+    form.clearErrors();
+    form.reset();
+  }, [form]);
+
   return (
     <Stack spacing={3}>
       <Typography variant="h4" component="h1">
@@ -107,10 +129,10 @@ export default function FormPage() {
 
       <Stepper activeStep={activeStep} />
 
-      <Paper className="p-4" elevation={0}>
+      <Paper className="p-4 pt-0" elevation={0}>
         <FormProvider {...form}>
           <ErrorAlert />
-          <form onSubmit={onSubmit} className="grid gap-4">
+          <form onSubmit={onSubmit} onReset={handleReset} className="grid gap-4">
             <Grid container direction={'column'} spacing={3}>
               <ErrorBoundary>
                 <SuspenseWrapper>{getStepContent(activeStep)}</SuspenseWrapper>
@@ -123,12 +145,18 @@ export default function FormPage() {
                     alignItems: 'end',
                     flexGrow: 1,
                     gap: 1,
+                    justifyContent: 'space-between',
                   },
-                  activeStep !== 0
-                    ? { justifyContent: 'space-between' }
-                    : { justifyContent: 'flex-end' },
                 ]}
               >
+                <Button
+                  type="reset"
+                  color="inherit"
+                  variant="contained"
+                  sx={{ display: { xs: 'none', sm: 'flex' } }}
+                >
+                  {t('buttons.reset')}
+                </Button>
                 {activeStep !== 0 && (
                   <Button
                     startIcon={<ChevronLeftRoundedIcon />}

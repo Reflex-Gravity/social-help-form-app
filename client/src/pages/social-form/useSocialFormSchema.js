@@ -1,27 +1,18 @@
 import * as yup from 'yup';
+import {
+  employmentStatusOptions,
+  genderOptions,
+  housingStatusOptions,
+  maritialStatusOptions,
+} from '../../lib/constants';
+
+const getValFunc = (option) => option.value;
 
 // Allowed values from the select components
-const genderValues = ['male', 'female'];
-const maritalStatusValues = ['single', 'Married', 'Divorced', 'widowed'];
-const employmentStatusValues = [
-  'full_time',
-  'part_time',
-  'self_employed',
-  'freelancer',
-  'unemployed',
-  'student',
-  'retired',
-  'homemaker',
-  'unable_to_work',
-];
-const housingStatusValues = [
-  'self_own',
-  'renting',
-  'living_parents',
-  'living_relatives',
-  'employer_provided',
-  'temporary',
-];
+const genderValues = genderOptions.map(getValFunc);
+const maritalStatusValues = maritialStatusOptions.map(getValFunc);
+const employmentStatusValues = employmentStatusOptions.map(getValFunc);
+const housingStatusValues = housingStatusOptions.map(getValFunc);
 
 // Helper for validating date-like values possibly coming from MUI DatePicker (Dayjs/Date)
 function toJsDate(val) {
@@ -32,7 +23,7 @@ function toJsDate(val) {
   return null;
 }
 
-const schema = yup.object({
+const personalInfoSchema = yup.object({
   // PersonalInfoForm
   name: yup
     .string()
@@ -50,7 +41,6 @@ const schema = yup.object({
   dob: yup
     .mixed()
     .required('Date of birth is required')
-    .test('valid-date', 'Invalid date of birth', (val) => !!toJsDate(val))
     .test('not-in-future', 'Date of birth cannot be in the future', (val) => {
       const d = toJsDate(val);
       if (!d) return true;
@@ -86,7 +76,9 @@ const schema = yup.object({
   country: yup.string().required('Country is required'),
   state: yup.string().required('State is required'),
   city: yup.string().required('City is required'),
+});
 
+const familyFinancialSchema = yup.object({
   // FamilyFinancialInfoForm
   maritalStatus: yup
     .string()
@@ -94,11 +86,11 @@ const schema = yup.object({
     .required('Marital status is required'),
   dependants: yup
     .number()
-    .typeError('Dependants must be a number')
-    .integer('Dependants must be an integer')
-    .min(0, 'Dependants cannot be negative')
-    .max(20, 'Dependants seems too high')
-    .required('Dependants is required'),
+    .required('Dependants is required')
+    .typeError('Dependants is not valid')
+    .integer('Dependants is not valid')
+    .min(0, 'Dependants is not valid')
+    .max(20, 'Dependants cannot be more than 20'),
   employmentStatus: yup
     .string()
     .oneOf(employmentStatusValues, 'Select a valid employment status')
@@ -112,8 +104,9 @@ const schema = yup.object({
     .string()
     .oneOf(housingStatusValues, 'Select a valid housing status')
     .required('Housing status is required'),
+});
 
-  // SituationDescriptionsForm
+const situationalDescSchema = yup.object({
   currentFinancialSituation: yup
     .string()
     .trim()
@@ -127,4 +120,7 @@ const schema = yup.object({
   reason: yup.string().trim().min(10, 'Please provide more details').required('Reason is required'),
 });
 
-export default schema;
+// For step-wise schema validations
+const formSchema = [personalInfoSchema, familyFinancialSchema, situationalDescSchema];
+
+export default formSchema;

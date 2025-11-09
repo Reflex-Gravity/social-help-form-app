@@ -4,34 +4,11 @@ import { useTranslation } from 'react-i18next';
 import { Grid } from '@mui/material';
 
 import FormSelectInput from '../../../components/FormSelectInput';
-
-const maritialStatusOptions = [
-  { label: 'Single', value: 'single' },
-  { label: 'Married', value: 'Married' },
-  { label: 'Divorced', value: 'Divorced' },
-  { label: 'Widowed', value: 'widowed' },
-];
-
-const employmentStatusOptions = [
-  { label: 'Full-time Employed', value: 'full_time' },
-  { label: 'Part-time Employed', value: 'part_time' },
-  { label: 'Self-employed', value: 'self_employed' },
-  { label: 'Freelancer/Contract', value: 'freelancer' },
-  { label: 'Unemployed', value: 'unemployed' },
-  { label: 'Student', value: 'student' },
-  { label: 'Retired', value: 'retired' },
-  { label: 'Homemaker', value: 'homemaker' },
-  { label: 'Unable to Work', value: 'unable_to_work' },
-];
-
-const housingStatusOptions = [
-  { label: 'Self Own', value: 'self_own' },
-  { label: 'Renting', value: 'renting' },
-  { label: 'Living with Parents', value: 'living_parents' },
-  { label: 'Living with Relatives', value: 'living_relatives' },
-  { label: 'Provided by Employer', value: 'employer_provided' },
-  { label: 'Temporary/Transitional', value: 'temporary' },
-];
+import {
+  employmentStatusOptions,
+  housingStatusOptions,
+  maritialStatusOptions,
+} from '../../../lib/constants';
 
 function FamilyFinancialInfoForm() {
   const { t } = useTranslation();
@@ -41,16 +18,19 @@ function FamilyFinancialInfoForm() {
         name="maritalStatus"
         label={t('form.maritalStatus')}
         options={maritialStatusOptions}
+        required
       />
-      <FormInput name="dependants" label={t('form.dependants')} />
+      <FormInput field={{ type: 'number' }} name="dependants" label={t('form.dependants')} />
       <FormSelectInput
         name="employmentStatus"
         label={t('form.employementStatus')}
+        required
         options={employmentStatusOptions}
       />
       <FormInput name="monthlyIncome" label={t('form.monthlyIncome')} />
       <FormSelectInput
         name="housingStatus"
+        required
         label={t('form.housingStatus')}
         options={housingStatusOptions}
       />

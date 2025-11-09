@@ -11,6 +11,8 @@ function ErrorAlert() {
     return null;
   }
 
+  console.log('errors', errors);
+
   return Object.keys(errors).length > 0 ? (
     <Alert severity="error" className="mb-3">
       Please fill the required fields

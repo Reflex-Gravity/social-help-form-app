@@ -4,7 +4,7 @@ import { initReactI18next } from 'react-i18next';
 const resources = {
   en: {
     translation: {
-      app: { title: '' },
+      app: { title: '', loading: 'Loading...' },
       nav: { home: 'Home', form: 'Form' },
       buttons: {
         reset: 'Reset',
@@ -26,7 +26,7 @@ const resources = {
         maritalStatus: 'Maritial Status',
         dependants: 'Dependants',
         employementStatus: 'Employment Status',
-        monthlyIncome: 'Monthly Income',
+        monthlyIncome: 'Monthly Income (AED)',
         housingStatus: 'Housing Status',
         currentFinancialSituation: 'Current Financial Situation',
         employementCircumstances: 'Employement Circumstances',

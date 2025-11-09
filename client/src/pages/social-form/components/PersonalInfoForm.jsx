@@ -6,11 +6,7 @@ import FormDateInput from '../../../components/FormDateInput';
 import FormSelectInput from '../../../components/FormSelectInput';
 import AutoComplete from '../../../components/AutoComplete';
 import CountryStateCity from './FormCountryStateCityInput';
-
-const genderOptions = [
-  { label: 'Male', value: 'male' },
-  { label: 'Female', value: 'female' },
-];
+import { genderOptions } from '../../../lib/constants';
 
 function PersonalInfoForm() {
   const { t } = useTranslation();
@@ -19,7 +15,13 @@ function PersonalInfoForm() {
       <FormInput name="name" label={t('form.name')} />
       <FormInput name="nationalId" label={t('form.nationalId')} />
       <FormDateInput name="dob" label={t('form.dob')} datePickerProps={{ disableFuture: true }} />
-      <FormSelectInput name="gender" label={t('form.gender')} options={genderOptions} />
+      <FormSelectInput
+        name="gender"
+        label={t('form.gender')}
+        options={genderOptions}
+        required
+        placeholder="Select a gender"
+      />
       <FormInput name="address" label={t('form.address')} field={{ multiline: true }} />
       <FormInput name="phone" label={t('form.phone')} field={{ multiline: true }} />
       <FormInput name="email" label={t('form.email')} />
