@@ -13,9 +13,10 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import './i18n';
 import App from './App.jsx';
-import store from './app/store.js';
+import store from './store/store.js';
 import './index.css';
 import AppTheme from './theme/AppTheme.jsx';
+import Notifications from './components/Notifications.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -28,6 +29,7 @@ createRoot(document.getElementById('root')).render(
             <CssBaseline />
             <BrowserRouter>
               <App />
+              <Notifications />
             </BrowserRouter>
           </LocalizationProvider>
         </AppTheme>

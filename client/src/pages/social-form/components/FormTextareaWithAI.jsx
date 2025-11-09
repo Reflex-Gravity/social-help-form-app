@@ -35,7 +35,7 @@ function FormTextareaWithAI({ label, name, placeholder, minRows, maxRows, textar
   const handleGenerate = useCallback(async () => {
     setLoading(true);
     try {
-      const content = await generateDescription({ field: name });
+      const content = await generateDescription({ field: label });
       setGeneratedContent(content);
       setEditedContent(content);
       setOpen(true);
@@ -44,7 +44,7 @@ function FormTextareaWithAI({ label, name, placeholder, minRows, maxRows, textar
     } finally {
       setLoading(false);
     }
-  }, [name]);
+  }, [label]);
 
   const handleAccept = () => {
     setValue(name, editedContent, { shouldValidate: true, shouldDirty: true });
@@ -66,13 +66,13 @@ function FormTextareaWithAI({ label, name, placeholder, minRows, maxRows, textar
         minRows={minRows}
         aiButton={
           <Button
-            variant="contained"
-            className="bg-purple-300 border-purple-800 border-0 mb-2"
+            variant="text"
+            className=" text-purple-800 border-0 mb-2 hover:bg-purple-50"
             startIcon={loading ? <CircularProgress size={16} /> : <AutoAwesomeIcon />}
             onClick={handleGenerate}
             disabled={loading}
           >
-            {loading ? 'Generating...' : 'Generate'}
+            {loading ? 'Generating...' : 'Help Me Write'}
           </Button>
         }
         maxRows={maxRows}
