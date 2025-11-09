@@ -4,14 +4,9 @@ import { initReactI18next } from 'react-i18next';
 const resources = {
   en: {
     translation: {
-      app: { title: 'Form App' },
+      app: { title: '' },
       nav: { home: 'Home', form: 'Form' },
-      home: {
-        welcome: 'Welcome to the starter!',
-        counter: 'Counter value: {{value}}',
-      },
       buttons: {
-        increment: 'Increment',
         reset: 'Reset',
         next: 'Next',
         back: 'Previous',
@@ -19,7 +14,7 @@ const resources = {
         submit: 'Submit',
       },
       form: {
-        title: 'Example Form',
+        title: 'Social Support Application',
         name: 'Name',
         email: 'Email',
         gender: 'Gender',

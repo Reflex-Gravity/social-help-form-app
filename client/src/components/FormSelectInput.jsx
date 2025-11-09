@@ -4,7 +4,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useFormContext } from 'react-hook-form';
-import { FormLabel } from '@mui/material';
+import { FormHelperText, FormLabel } from '@mui/material';
 import FormGrid from './FormGrid';
 
 export default function FormSelectInput({ name, label, options }) {
@@ -25,6 +25,7 @@ export default function FormSelectInput({ name, label, options }) {
           </MenuItem>
         ))}
       </Select>
+      <FormHelperText error={!!errors[name]}>{errors?.[name]?.message}</FormHelperText>
     </FormGrid>
   );
 }

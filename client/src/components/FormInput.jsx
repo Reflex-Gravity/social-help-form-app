@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormLabel, OutlinedInput } from '@mui/material';
+import { FormHelperText, FormLabel, OutlinedInput } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
 import FormGrid from './FormGrid';
 
@@ -14,13 +14,8 @@ function FormInput({ field, label, name, placeholder }) {
       <FormLabel htmlFor={name} required>
         {label}
       </FormLabel>
-      <OutlinedInput
-        {...field}
-        {...register(name)}
-        error={!!errors[name]}
-        placeholder={placeholder}
-        helperText={errors?.[name]?.message}
-      />
+      <OutlinedInput {...field} {...register(name)} placeholder={placeholder} />
+      <FormHelperText error={!!errors[name]}>{errors?.[name]?.message}</FormHelperText>
     </FormGrid>
   );
 }

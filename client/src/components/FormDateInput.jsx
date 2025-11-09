@@ -28,7 +28,7 @@ function FormDateInput({ label, name, datePickerProps }) {
         onChange={(newValue) => setValue(name, newValue)}
         enableAccessibleFieldDOMStructure={false}
         slotProps={{
-          textField: { helperText: errors?.[name]?.message },
+          textField: { helperText: errors?.[name]?.message, error: !!errors[name] },
           openPickerButton: { className: 'border-0 bg-transparent' },
         }}
         {...datePickerProps}
