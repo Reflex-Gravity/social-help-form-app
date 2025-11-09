@@ -1,12 +1,12 @@
-/* eslint-env jest */
-import { jest, describe, test, expect } from '@jest/globals';
+/* eslint-env browser */
+import { describe, test, expect, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEventLib from '@testing-library/user-event';
 import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from '../src/i18n/index.js';
 
 // Mock MUI components to avoid ESM transpile issues in Jest
-jest.mock('@mui/material', () => ({
+vi.mock('@mui/material', () => ({
   Button: ({ onClick, children }) => (
     // minimal stub to simulate a clickable button
     <button onClick={onClick}>{children}</button>
@@ -23,7 +23,7 @@ function NavHomeLabel() {
   return <div data-testid="nav-home">{t('nav.home')}</div>;
 }
 
-function TestHarness() {
+function TestWrapper() {
   return (
     <I18nextProvider i18n={i18n}>
       <LanguageSwitcher />
@@ -33,11 +33,10 @@ function TestHarness() {
 }
 
 describe('LanguageSwitcher', () => {
-  test('toggles between English and Arabic and updates dir/localStorage/i18n', async () => {
+  test('toggles between English and Arabic and updates localStorage', async () => {
     // initial state prepared by setupTests: en + ltr
-    render(<TestHarness />);
+    render(<TestWrapper />);
 
-    // Button label reflects the next language choice
     // If current language is 'en', the button shows 'Arabic'
     expect(screen.getByRole('button', { name: 'Arabic' })).toBeInTheDocument();
     expect(screen.getByTestId('nav-home')).toHaveTextContent('Home');
@@ -46,7 +45,7 @@ describe('LanguageSwitcher', () => {
     // Toggle to Arabic
     await userEvent.click(screen.getByRole('button', { name: 'Arabic' }));
 
-    // Button should now invite switching back to English
+    // English Button should now be available
     await waitFor(() =>
       expect(screen.getByRole('button', { name: 'English' })).toBeInTheDocument(),
     );

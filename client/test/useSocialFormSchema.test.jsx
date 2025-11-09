@@ -1,5 +1,5 @@
-/* eslint-env jest */
-import { describe, test, expect } from '@jest/globals';
+/* eslint-env browser */
+import { describe, test, expect } from 'vitest';
 import { renderHook } from '@testing-library/react';
 import { I18nextProvider } from 'react-i18next';
 import i18n from '../src/i18n/index.js';
@@ -18,9 +18,13 @@ describe('useSocialFormSchema validations', () => {
       errors: ['Enter a valid name'],
     });
 
+    await expect(personalInfoSchema.validateAt('name', { name: 'Samuel' })).resolves.toMatchObject(
+      {},
+    );
+
     await expect(
       personalInfoSchema.validateAt('nationalId', { nationalId: '***' }),
-    ).rejects.toMatchObject({ errors: ['National ID must be alphanumeric'] });
+    ).rejects.toMatchObject({ errors: ['National ID must be at least 4 characters'] });
 
     const future = new Date(Date.now() + 24 * 60 * 60 * 1000);
     await expect(personalInfoSchema.validateAt('dob', { dob: future })).rejects.toMatchObject({

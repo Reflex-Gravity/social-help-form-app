@@ -1,6 +1,6 @@
-/* eslint-env jest */
-import { beforeEach } from '@jest/globals';
-import '@testing-library/jest-dom';
+/* eslint-env browser */
+import { beforeEach } from 'vitest';
+import '@testing-library/jest-dom/vitest';
 import i18n from '../src/i18n/index.js';
 
 beforeEach(async () => {
