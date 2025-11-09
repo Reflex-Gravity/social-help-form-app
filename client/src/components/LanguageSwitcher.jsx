@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import { Button, Icon } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 export default function LanguageSwitcher() {
@@ -13,8 +13,14 @@ export default function LanguageSwitcher() {
   };
 
   return (
-    <Button color="inherit" onClick={toggle} className="!normal-case">
-      {t('buttons.changeLang')}
+    <Button
+      color="primary"
+      onClick={toggle}
+      variant="text"
+      className="font-bold border text-blue-950"
+      startIcon={<Icon>language</Icon>}
+    >
+      {i18n.language === 'en' ? 'Arabic' : 'English'}
     </Button>
   );
 }
