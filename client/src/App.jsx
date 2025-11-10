@@ -14,9 +14,14 @@ const NotFound = lazy(() => import('./pages/NotFound.jsx'));
 
 function App() {
   const lang = useSelector(({ app }) => app.lang);
+
   // preselect the language
   useEffect(() => {
-    document.documentElement.dir = getLanguageDir(lang);
+    const direction = getLanguageDir(lang);
+    document.documentElement.dir = direction;
+    document.dir = direction;
+    document.documentElement.setAttribute('dir', direction);
+
     i18n.changeLanguage(lang);
   }, [lang]);
 

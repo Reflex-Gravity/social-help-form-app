@@ -2319,7 +2319,7 @@ css.escape@^1.5.1:
   resolved "https://registry.yarnpkg.com/css.escape/-/css.escape-1.5.1.tgz#42e27d4fa04ae32f931a4b4d4191fa9cddee97cb"
   integrity sha512-YUifsXXuknHlUsmlgyY0PKzgPOr7/FjCePfHNt0jxm83wHZi44VDMQ7/fGNkjY3/jV1MC+1CmZbaHzugyeRtpg==
 
-cssjanus@^2.3.0:
+cssjanus@^2.0.1, cssjanus@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/cssjanus/-/cssjanus-2.3.0.tgz#af91e639a34d8b241e5032824f3f1b7f8dd91557"
   integrity sha512-ZZXXn51SnxRxAZ6fdY7mBDPmA4OZd83q/J9Gdqz3YmE9TUq+9tZl+tdOnCi7PpNygI6PEkehj9rgifv5+W8a5A==
@@ -4103,6 +4103,13 @@ strip-json-comments@^3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-3.1.1.tgz#31f1281b3832630434831c310c01cccda8cbe006"
   integrity sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==
+
+stylis-plugin-rtl@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/stylis-plugin-rtl/-/stylis-plugin-rtl-2.1.1.tgz#16707809c878494835f77e5d4aadaae3db639b5e"
+  integrity sha512-q6xIkri6fBufIO/sV55md2CbgS5c6gg9EhSVATtHHCdOnbN/jcI0u3lYhNVeuI65c4lQPo67g8xmq5jrREvzlg==
+  dependencies:
+    cssjanus "^2.0.1"
 
 stylis@4.2.0:
   version "4.2.0"

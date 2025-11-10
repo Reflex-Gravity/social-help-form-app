@@ -1,12 +1,8 @@
 import * as React from 'react';
 import { alpha } from '@mui/material/styles';
 
-import { buttonBaseClasses } from '@mui/material/ButtonBase';
-import { dividerClasses } from '@mui/material/Divider';
-import { menuItemClasses } from '@mui/material/MenuItem';
-import { selectClasses } from '@mui/material/Select';
 import { tabClasses } from '@mui/material/Tab';
-import UnfoldMoreRoundedIcon from '@mui/icons-material/UnfoldMoreRounded';
+
 import { gray, brand } from './themePrimitives';
 
 export const navigationCustomizations = {
@@ -40,13 +36,6 @@ export const navigationCustomizations = {
           outlineOffset: '4px',
           borderRadius: '2px',
         },
-      }),
-    },
-  },
-  MuiDrawer: {
-    styleOverrides: {
-      paper: ({ theme }) => ({
-        backgroundColor: (theme.vars || theme).palette.background.default,
       }),
     },
   },

@@ -4,8 +4,6 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import CssBaseline from '@mui/material/CssBaseline';
-import { StyledEngineProvider } from '@mui/material/styles';
-import GlobalStyles from '@mui/material/GlobalStyles';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
@@ -18,20 +16,17 @@ import Notifications from './components/Notifications.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <StyledEngineProvider enableCssLayer>
-      {/* For tailwind precedence */}
-      <GlobalStyles styles="@layer theme, base, mui, components, utilities;" />
-      <Provider store={store}>
-        <AppTheme>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <CssBaseline />
-            <BrowserRouter>
-              <App />
-              <Notifications />
-            </BrowserRouter>
-          </LocalizationProvider>
-        </AppTheme>
-      </Provider>
-    </StyledEngineProvider>
+    {/* For tailwind precedence */}
+    <Provider store={store}>
+      <AppTheme>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <CssBaseline />
+          <BrowserRouter>
+            <App />
+            <Notifications />
+          </BrowserRouter>
+        </LocalizationProvider>
+      </AppTheme>
+    </Provider>
   </StrictMode>,
 );

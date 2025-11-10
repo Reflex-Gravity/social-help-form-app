@@ -1,9 +1,7 @@
-import { Box, CircularProgress, Typography } from '@mui/material';
+import { CircularProgress } from '@mui/material';
 import React, { Suspense } from 'react';
-import { useTranslation } from 'react-i18next';
 
 function SuspenseWrapper({ children }) {
-  const { t } = useTranslation();
   return (
     <Suspense
       fallback={

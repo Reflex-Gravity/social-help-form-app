@@ -6,7 +6,6 @@ import Select from '@mui/material/Select';
 import { Controller, useFormContext } from 'react-hook-form';
 import { FormHelperText, FormLabel } from '@mui/material';
 import FormGrid from './FormGrid';
-import { useTranslation } from 'react-i18next';
 
 /**
  * @param {{
