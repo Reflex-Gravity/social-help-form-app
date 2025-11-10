@@ -34,6 +34,17 @@ function AppTheme({ children }) {
     return createTheme({
       shape,
       direction,
+      typography: {
+        fontFamily: [
+          'Lato',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          '"Segoe UI"',
+          'Roboto',
+          'Arial',
+          'sans-serif',
+        ].join(','),
+      },
       components: {
         ...inputsCustomizations,
         ...navigationCustomizations,
