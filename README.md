@@ -110,7 +110,7 @@ cd client && yarn test
 ## Troubleshooting
 
 - Node version errors
-  - Ensure Node.js >= 24: `node -v`
+  - Ensure Node.js >= 20: `node -v`
 - Port already in use
   - Change `CLIENT_PORT` in `client/.env` or `SERVER_PORT` in `server/.env`, or free the port in use
 - Client cannot reach server
