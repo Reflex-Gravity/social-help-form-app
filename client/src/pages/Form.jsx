@@ -132,6 +132,8 @@ export default function FormPage() {
           {isDesktop && <FormLeft />}
           <Grid
             size={{ lg: 11, xs: 16 }}
+            overflow={'scroll'}
+            height={'100vh'}
             className="bg-gray-100"
             padding={3}
             paddingTop={1}
