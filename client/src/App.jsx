@@ -5,18 +5,20 @@ import Home from './pages/Home.jsx';
 import ErrorBoundary from './components/ErrorBoundary.jsx';
 import SuspenseWrapper from './components/SuspenseWrapper.jsx';
 import i18n from './i18n/index.js';
+import { useSelector } from 'react-redux';
+import { getLanguageDir } from './lib/library.functions.js';
 
 const FormPage = lazy(() => import('./pages/Form.jsx'));
 const MainForm = lazy(() => import('./pages/social-form/MainForm.jsx'));
 const NotFound = lazy(() => import('./pages/NotFound.jsx'));
 
 function App() {
+  const lang = useSelector(({ app }) => app.lang);
   // preselect the language
   useEffect(() => {
-    const lang = localStorage.getItem('lang') || 'en';
+    document.documentElement.dir = getLanguageDir(lang);
     i18n.changeLanguage(lang);
-    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-  }, []);
+  }, [lang]);
 
   return (
     <ErrorBoundary>

@@ -28,6 +28,7 @@ import ErrorBoundary from '../components/ErrorBoundary.jsx';
 import { useFormPersist } from '../hooks/useFormPersist.jsx';
 import ErrorAlert from './social-form/components/ErrorAlert.jsx';
 import useSocialFormSchema from './social-form/useSocialFormSchema.js';
+import { socialFormSubmitApi } from './social-form/api/socialform.api.js';
 
 const SituationDescriptionsForm = lazy(
   () => import('./social-form/components/SituationDescriptionsForm.jsx'),
@@ -56,10 +57,10 @@ export default function FormPage() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
-  const formSchema = useSocialFormSchema();
+  const formSchema = useSocialFormSchema(activeStep);
 
   const form = useForm({
-    resolver: yupResolver(formSchema[activeStep]), // attach defined schema here
+    resolver: yupResolver(formSchema), // attach defined schema here
     mode: 'onBlur',
     defaultValues: {
       name: '',
@@ -91,15 +92,18 @@ export default function FormPage() {
     setSubmitted(false);
     setLoading(true);
     try {
-      // Example API call (adjust baseURL in .env as VITE_API_BASE_URL if needed)
-      // await api.post('/submit', data);
-      console.log(form.getValues());
-      await new Promise((res) => setTimeout(res, 600)); // mock
-      setSubmitted(true);
-      reset();
+      const isValid = await form.trigger(); // validates all fields
+
+      if (isValid) {
+        const formData = form.getValues();
+
+        await socialFormSubmitApi({ formData });
+        setSubmitted(true);
+        reset();
+        setActiveStep(0);
+      }
     } catch {
-      // handle error globally/interceptor or show local error UI
-      // console.error(err);
+      //
     } finally {
       setLoading(false);
     }
@@ -184,7 +188,7 @@ export default function FormPage() {
                     type="submit"
                     sx={{ width: { xs: '100%', sm: 'fit-content' } }}
                   >
-                    {t('buttons.submit')}
+                    {loading ? t('buttons.submitting') : t('buttons.submit')}
                   </Button>
                 )}
               </Box>

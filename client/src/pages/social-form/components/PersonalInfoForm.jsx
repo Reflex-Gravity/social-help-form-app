@@ -20,7 +20,7 @@ function PersonalInfoForm() {
         label={t('form.gender')}
         options={genderOptions}
         required
-        placeholder="Select a gender"
+        placeholder={t('form.selectGender')}
       />
       <FormInput name="address" label={t('form.address')} field={{ multiline: true }} />
       <FormInput name="phone" label={t('form.phone')} field={{ multiline: true }} />

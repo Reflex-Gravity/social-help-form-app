@@ -13,7 +13,19 @@ router.use('/health', async (req, res) => {
 });
 
 router.post('/form-submit', async (req, res) => {
-  return res.status(200).json({ status: 'success', message: 'form submitted' });
+  try {
+    const { formData } = req.body;
+
+    console.log(req.body);
+    if (!formData.name) {
+      return res.status(400).json({ error: 'Invalid payload' });
+    }
+
+    return res.status(200).json({ status: 'success', message: 'form submitted' });
+  } catch (error) {
+    console.error('Error in form-submit', error);
+    return res.status(500).json({ error: 'Service Unavailable' });
+  }
 });
 
 router.post('/generate', async (req, res) => {

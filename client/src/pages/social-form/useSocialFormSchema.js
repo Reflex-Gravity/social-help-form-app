@@ -25,7 +25,7 @@ function toJsDate(val) {
   return null;
 }
 
-export default function useSocialFormSchema() {
+export default function useSocialFormSchema(activeStep) {
   const { t } = useTranslation();
 
   const formSchema = useMemo(() => {
@@ -132,8 +132,12 @@ export default function useSocialFormSchema() {
     });
 
     // For step-wise schema validations
-    return [personalInfoSchema, familyFinancialSchema, situationalDescSchema];
-  }, [t]);
+    const schemas = [personalInfoSchema, familyFinancialSchema, situationalDescSchema].filter(
+      (a, schemaIndex) => schemaIndex <= activeStep,
+    );
+
+    return schemas.reduce((acc, curr) => acc.concat(curr), yup.object({}));
+  }, [t, activeStep]);
 
   return formSchema;
 }

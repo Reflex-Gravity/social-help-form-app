@@ -2,8 +2,10 @@ import React from 'react';
 import { FormHelperText, FormLabel, OutlinedInput } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
 import FormGrid from './FormGrid';
+import { useTranslation } from 'react-i18next';
 
 function FormInput({ field, label, name, placeholder }) {
+  const { t } = useTranslation();
   const {
     register,
     formState: { errors },

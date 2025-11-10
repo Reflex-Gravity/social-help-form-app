@@ -2,14 +2,12 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { ThemeProvider } from '@mui/material/styles';
+
 import CssBaseline from '@mui/material/CssBaseline';
 import { StyledEngineProvider } from '@mui/material/styles';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import './i18n';
 import App from './App.jsx';
@@ -34,7 +32,6 @@ createRoot(document.getElementById('root')).render(
           </LocalizationProvider>
         </AppTheme>
       </Provider>
-      {/* Your app */}
     </StyledEngineProvider>
   </StrictMode>,
 );
