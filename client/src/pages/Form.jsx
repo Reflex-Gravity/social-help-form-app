@@ -152,6 +152,7 @@ export default function FormPage() {
 
             <Typography
               marginTop={{ xs: 3, lg: 5 }}
+              paddingLeft={1}
               fontSize={{ xs: 18, sm: 22 }}
               className={clsx('font-semibold', i18n.language === 'ar' ? 'alexandria' : '')}
             >
