@@ -48,6 +48,7 @@ export default function FormPage() {
 
   const form = useForm({
     resolver: yupResolver(formSchema), // attach defined schema here
+    shouldFocusError: true,
     mode: 'onBlur',
     defaultValues: {
       name: '',
@@ -130,7 +131,7 @@ export default function FormPage() {
               <FormProvider {...form}>
                 <ErrorAlert />
                 <form onSubmit={onSubmit} onReset={handleReset} className="grid gap-4">
-                  <Grid container direction={'column'} spacing={3}>
+                  <Grid container direction={'column'} spacing={form.formState.errors ? 2 : 3}>
                     <Box className="min-h-120">
                       <ErrorBoundary>
                         <SuspenseWrapper>{getStepContent(activeStep)}</SuspenseWrapper>

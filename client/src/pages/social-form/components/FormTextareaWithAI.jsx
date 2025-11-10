@@ -9,6 +9,7 @@ import {
   Box,
   CircularProgress,
   Typography,
+  Tooltip,
 } from '@mui/material';
 import { useFormContext } from 'react-hook-form';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
@@ -69,22 +70,30 @@ function FormTextareaWithAI({ label, name, placeholder, minRows, maxRows, textar
         placeholder={placeholder}
         minRows={minRows}
         aiButton={
-          <Button
-            variant="text"
-            className=" text-purple-800 border-0 mb-2 hover:bg-purple-50"
-            startIcon={loading ? <CircularProgress size={16} /> : <AutoAwesomeIcon />}
-            onClick={handleGenerate}
-            disabled={loading}
-          >
-            {loading ? t('form.generating') : t('form.helpMeWrite')}
-          </Button>
+          <Tooltip title={t('form.smartHelpTooltip')}>
+            <Button
+              variant="text"
+              className=" text-amber-800 text-[12px] border-0 mb-1"
+              startIcon={
+                loading ? (
+                  <CircularProgress size={16} />
+                ) : (
+                  <AutoAwesomeIcon className="text-amber-600 text-[12px]" />
+                )
+              }
+              onClick={handleGenerate}
+              disabled={loading}
+            >
+              {loading ? t('form.generating') : t('form.helpMeWrite')}
+            </Button>
+          </Tooltip>
         }
         maxRows={maxRows}
         textareaProps={textareaProps}
       />
 
       <Dialog open={open} onClose={handleDiscard} maxWidth="md" fullWidth>
-        <DialogTitle>label</DialogTitle>
+        <DialogTitle>{label}</DialogTitle>
         <DialogContent>
           <TextareaAutosize
             value={editedContent}

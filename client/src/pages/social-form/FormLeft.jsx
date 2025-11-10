@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Stack, Typography } from '@mui/material';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import FormBanner from '../assets/form_banner.png';
+import FormBanner from '../../assets/form_banner.png';
 
 function FormLeft() {
   const { t, i18n } = useTranslation();
@@ -17,11 +17,11 @@ function FormLeft() {
           alignItems: 'center',
         }}
       >
-        <Stack alignItems="center" justifyContent="space-between">
+        <Stack alignItems="center" justifyContent="space-evenly">
           <Typography
             variant="h4"
             className={clsx(
-              'text-lg font-black sm:text-4xl text-center',
+              'text-lg font-black sm:text-[40px] text-center',
               i18n.language === 'ar' ? 'alexandria' : '',
             )}
             component="h2"
@@ -30,7 +30,7 @@ function FormLeft() {
           </Typography>
           <Typography
             className={clsx(
-              'text-md font-black text-amber-900 sm:text-xl',
+              'text-md font-black text-amber-900 sm:text-[25px]',
               i18n.language === 'ar' ? 'alexandria' : '',
             )}
           >

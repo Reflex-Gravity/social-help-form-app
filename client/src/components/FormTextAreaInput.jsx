@@ -1,8 +1,7 @@
 import React from 'react';
-import { FormLabel, TextareaAutosize, FormHelperText, Box } from '@mui/material';
-import { useFormContext, Controller } from 'react-hook-form';
+import { FormLabel, TextareaAutosize, FormHelperText, Box, Grow } from '@mui/material';
+import { useController } from 'react-hook-form';
 import FormGrid from './FormGrid';
-import { useTranslation } from 'react-i18next';
 
 /**
  * @param {{
@@ -23,11 +22,10 @@ function FormTextareaInput({
   textareaProps,
   aiButton,
 }) {
-  const { t } = useTranslation();
   const {
-    control,
-    formState: { errors },
-  } = useFormContext();
+    fieldState: { error },
+    field,
+  } = useController({ name });
 
   return (
     <FormGrid size={{ xs: 12 }}>
@@ -37,34 +35,29 @@ function FormTextareaInput({
         </FormLabel>
         {aiButton}
       </Box>
-      <Controller
-        name={name}
-        control={control}
-        defaultValue=""
-        render={({ field }) => (
-          <>
-            <TextareaAutosize
-              {...field}
-              value={field.value ?? ''}
-              minRows={minRows}
-              maxRows={maxRows}
-              placeholder={placeholder}
-              style={{
-                width: '100%',
-                padding: '8px 14px',
-                fontSize: '1rem',
-                fontFamily: 'inherit',
-                borderRadius: '4px',
-                border: errors[name] ? '1px solid #d32f2f' : '1px solid rgba(0, 0, 0, 0.23)',
-                outline: 'none',
-                resize: 'vertical',
-              }}
-              {...textareaProps}
-            />
-            {errors[name] && <FormHelperText error>{errors[name]?.message}</FormHelperText>}
-          </>
-        )}
+
+      <TextareaAutosize
+        {...field}
+        minRows={minRows}
+        maxRows={maxRows}
+        placeholder={placeholder}
+        style={{
+          width: '100%',
+          padding: '8px 14px',
+          fontSize: '1rem',
+          fontFamily: 'inherit',
+          borderRadius: '4px',
+          border: error ? '1px solid #d32f2f' : '1px solid rgba(0, 0, 0, 0.23)',
+          outline: 'none',
+          resize: 'vertical',
+        }}
+        {...textareaProps}
       />
+      <Grow in={!!error} unmountOnExit>
+        <FormHelperText id={name} error={!!error}>
+          {error?.message}
+        </FormHelperText>
+      </Grow>
     </FormGrid>
   );
 }

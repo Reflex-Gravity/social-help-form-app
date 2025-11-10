@@ -1,3 +1,6 @@
+export const DATE_FORMAT = 'D MMM YYYY';
+export const STORAGE_FORMAT = 'YYYY-MM-DD';
+
 const genderOptions = [
   { label: 'Male', value: 'male' },
   { label: 'Female', value: 'female' },

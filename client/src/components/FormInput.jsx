@@ -1,23 +1,24 @@
-import React from 'react';
-import { FormHelperText, FormLabel, OutlinedInput } from '@mui/material';
-import { useFormContext } from 'react-hook-form';
+import { FormHelperText, FormLabel, Grow, OutlinedInput } from '@mui/material';
+import { useController } from 'react-hook-form';
 import FormGrid from './FormGrid';
-import { useTranslation } from 'react-i18next';
 
 function FormInput({ field, label, name, placeholder }) {
-  const { t } = useTranslation();
   const {
-    register,
-    formState: { errors },
-  } = useFormContext();
+    fieldState: { error },
+    field: fieldProps,
+  } = useController({ name });
 
   return (
     <FormGrid size={{ xs: 12, md: 6 }}>
       <FormLabel htmlFor={name} required>
         {label}
       </FormLabel>
-      <OutlinedInput {...field} {...register(name)} placeholder={placeholder} />
-      <FormHelperText error={!!errors[name]}>{errors?.[name]?.message}</FormHelperText>
+      <OutlinedInput aria-describedby={name} {...field} {...fieldProps} placeholder={placeholder} />
+      <Grow in={!!error} unmountOnExit>
+        <FormHelperText id={name} error={!!error}>
+          {error?.message}
+        </FormHelperText>
+      </Grow>
     </FormGrid>
   );
 }

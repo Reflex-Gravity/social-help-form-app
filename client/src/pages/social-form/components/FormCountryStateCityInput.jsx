@@ -4,6 +4,8 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { FormLabel } from '@mui/material';
 import { useFormContext, Controller } from 'react-hook-form';
 import FormGrid from '../../../components/FormGrid';
+import AutoComplete from '../../../components/AutoComplete';
+import { useTranslation } from 'react-i18next';
 
 // In production, use a package like 'country-state-city' or fetch from API
 const countryData = {
@@ -30,6 +32,7 @@ const countryData = {
 };
 
 export default function CountryStateCity() {
+  const { t } = useTranslation();
   const {
     watch,
     setValue,
@@ -71,60 +74,30 @@ export default function CountryStateCity() {
 
   return (
     <>
-      <FormGrid size={{ xs: 12, md: 6 }}>
-        <FormLabel required>Country</FormLabel>
-
-        <Autocomplete
-          value={selectedCountry || null}
-          onChange={(_, newValue) => setValue('country', handleCountryChange(newValue))}
-          options={countries}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              placeholder="Choose a country"
-              error={!!errors.country}
-              helperText={errors.country?.message}
-            />
-          )}
-        />
-      </FormGrid>
-
-      <FormGrid size={{ xs: 12, md: 6 }}>
-        <FormLabel required>State</FormLabel>
-
-        <Autocomplete
-          value={selectedState || null}
-          onChange={(_, newValue) => setValue('state', handleStateChange(newValue))}
-          options={states}
-          disabled={!selectedCountry}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              placeholder="Choose a state"
-              error={!!errors.state}
-              helperText={errors.state?.message}
-            />
-          )}
-        />
-      </FormGrid>
-
-      <FormGrid size={{ xs: 12, md: 6 }}>
-        <FormLabel required>City</FormLabel>
-        <Autocomplete
-          value={selectedCity || null}
-          onChange={(_, newValue) => setValue('city', newValue)}
-          options={cities}
-          disabled={!selectedState}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              placeholder="Choose a city"
-              error={!!errors.city}
-              helperText={errors.city?.message}
-            />
-          )}
-        />
-      </FormGrid>
+      <AutoComplete
+        label={t('form.country')}
+        placeholder={t('form.chooseCountry')}
+        options={countries}
+        required
+        name="country"
+        onChange={(_, newValue) => setValue('country', handleCountryChange(newValue))}
+      />
+      <AutoComplete
+        label={t('form.state')}
+        placeholder={t('form.chooseState')}
+        options={states}
+        required
+        name="state"
+        onChange={(_, newValue) => setValue('state', handleStateChange(newValue))}
+      />
+      <AutoComplete
+        label={t('form.city')}
+        placeholder={t('form.chooseCity')}
+        options={cities}
+        required
+        name="city"
+        onChange={(_, newValue) => setValue('city', newValue)}
+      />
     </>
   );
 }

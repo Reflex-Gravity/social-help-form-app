@@ -1,12 +1,9 @@
-import React from 'react';
-import { FormLabel } from '@mui/material';
-import { Controller, useFormContext } from 'react-hook-form';
+import { FormHelperText, FormLabel, Grow } from '@mui/material';
+import { Controller, useController } from 'react-hook-form';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import FormGrid from './FormGrid';
 import dayjs from 'dayjs';
-
-const DATE_FORMAT = 'DD/MM/YYYY';
-const STORAGE_FORMAT = 'YYYY-MM-DD';
+import { DATE_FORMAT, STORAGE_FORMAT } from '../lib/constants';
 
 /**
  *
@@ -16,43 +13,35 @@ const STORAGE_FORMAT = 'YYYY-MM-DD';
  */
 function FormDateInput({ label, name, datePickerProps }) {
   const {
-    control,
-    formState: { errors },
-  } = useFormContext();
+    fieldState: { error },
+    field,
+  } = useController({ name });
 
   return (
     <FormGrid size={{ xs: 12, md: 6 }}>
       <FormLabel htmlFor={name} required>
         {label}
       </FormLabel>
-      <Controller
-        name={name}
-        control={control}
-        render={({ field }) => (
-          <DatePicker
-            {...field}
-            format={DATE_FORMAT}
-            value={field.value ? dayjs(field.value) : null}
-            onChange={(newValue) => {
-              // Convert to string for form value, or null if invalid
-              const stringValue =
-                newValue && dayjs(newValue).isValid()
-                  ? dayjs(newValue).format(STORAGE_FORMAT)
-                  : null;
-              field.onChange(stringValue);
-            }}
-            enableAccessibleFieldDOMStructure={false}
-            slotProps={{
-              textField: {
-                helperText: errors?.[name]?.message,
-                error: !!errors[name],
-              },
-              openPickerButton: { className: 'border-0 bg-transparent' },
-            }}
-            {...datePickerProps}
-          />
-        )}
+
+      <DatePicker
+        {...field}
+        format={DATE_FORMAT}
+        value={field.value ? dayjs(field.value) : null}
+        onChange={(newValue) => {
+          // Convert to string for form value, or null if invalid
+          const stringValue =
+            newValue && dayjs(newValue).isValid() ? dayjs(newValue).format(STORAGE_FORMAT) : null;
+          field.onChange(stringValue);
+        }}
+        enableAccessibleFieldDOMStructure={false}
+        slotProps={{
+          openPickerButton: { className: 'border-0 bg-transparent' },
+        }}
+        {...datePickerProps}
       />
+      <Grow in={!!error} unmountOnExit>
+        <FormHelperText error={!!error}>{error?.message}</FormHelperText>
+      </Grow>
     </FormGrid>
   );
 }

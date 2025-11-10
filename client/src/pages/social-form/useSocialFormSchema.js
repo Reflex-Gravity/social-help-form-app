@@ -4,9 +4,11 @@ import {
   genderOptions,
   housingStatusOptions,
   maritialStatusOptions,
+  STORAGE_FORMAT,
 } from '../../lib/constants';
 import { useTranslation } from 'react-i18next';
 import { useMemo } from 'react';
+import dayjs from 'dayjs';
 
 const getValFunc = (option) => option.value;
 
@@ -16,21 +18,17 @@ const maritalStatusValues = maritialStatusOptions.map(getValFunc);
 const employmentStatusValues = employmentStatusOptions.map(getValFunc);
 const housingStatusValues = housingStatusOptions.map(getValFunc);
 
-// Helper for validating date-like values possibly coming from MUI DatePicker (Dayjs/Date)
-function toJsDate(val) {
-  if (!val) return null;
-  if (val instanceof Date) return val;
-  if (typeof val?.toDate === 'function') return val.toDate(); // Dayjs
-  if (val?.$d) return new Date(val.$d); // Some adapters expose internal date
-  return null;
-}
-
+/**
+ * Social Form Schema
+ *
+ * @export
+ * @param {number} activeStep
+ * @return {yup.ObjectSchema}
+ */
 export default function useSocialFormSchema(activeStep) {
   const { t } = useTranslation();
 
   const formSchema = useMemo(() => {
-    console.log('re-render formSchema');
-
     const personalInfoSchema = yup.object({
       // PersonalInfoForm
       name: yup
@@ -47,15 +45,18 @@ export default function useSocialFormSchema(activeStep) {
         .matches(/^[A-Za-z0-9-]+$/, t('form.errors.alphanumericNationalId'))
         .required(t('form.errors.nationalIdRequired')),
       dob: yup
-        .mixed()
+        .date()
+        .transform(function (value, originalValue) {
+          if (this.isType(value)) {
+            return value;
+          }
+          const result = dayjs(originalValue, STORAGE_FORMAT, new Date());
+          return result;
+        })
+        .typeError(t('form.errors.validDob'))
         .required(t('form.errors.dobRequired'))
         .test('not-in-future', t('form.errors.dobNotFuture'), (val) => {
-          const d = toJsDate(val);
-          if (!d) return true;
-          const today = new Date();
-          d.setHours(0, 0, 0, 0);
-          today.setHours(0, 0, 0, 0);
-          return d.getTime() <= today.getTime();
+          return dayjs(val).isBefore(dayjs());
         }),
       gender: yup
         .string()

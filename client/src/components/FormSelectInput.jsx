@@ -4,7 +4,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Controller, useFormContext } from 'react-hook-form';
-import { FormHelperText, FormLabel } from '@mui/material';
+import { FormHelperText, FormLabel, Grow } from '@mui/material';
 import FormGrid from './FormGrid';
 
 /**
@@ -46,7 +46,9 @@ export default function FormSelectInput({ name, placeholder, label, required, op
           </Select>
         )}
       />
-      <FormHelperText error={!!errors[name]}>{errors?.[name]?.message}</FormHelperText>
+      <Grow in={!!errors[name]} unmountOnExit>
+        <FormHelperText error={!!errors[name]}>{errors?.[name]?.message}</FormHelperText>
+      </Grow>
     </FormGrid>
   );
 }
