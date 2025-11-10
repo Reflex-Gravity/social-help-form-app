@@ -8,6 +8,10 @@ body,
   height: 100%;
 }
 
+* {
+  outline-color: #cba344;
+}
+
 .bg-mild-orange {
   background-color: #f0eee4;
 }

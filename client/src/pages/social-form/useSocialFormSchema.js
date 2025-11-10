@@ -71,7 +71,7 @@ export default function useSocialFormSchema(activeStep) {
       phone: yup
         .string()
         .trim()
-        .matches(/^[0-9+()\s-]{7,20}$/, t('form.errors.validPhone'))
+        .matches(/^[0-9+()\s-]{7,18}$/, t('form.errors.validPhone'))
         .required(t('form.errors.phoneRequired')),
       email: yup
         .string()

@@ -1,6 +1,17 @@
 import { lazy, useCallback, useState } from 'react';
 import { useForm, Controller, FormProvider } from 'react-hook-form';
-import { Alert, Box, Button, Grid, MobileStepper, Paper, Stack, useTheme } from '@mui/material';
+import {
+  Alert,
+  Box,
+  Button,
+  Grid,
+  MobileStepper,
+  Paper,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
@@ -15,6 +26,7 @@ import ErrorAlert from './social-form/components/ErrorAlert.jsx';
 import useSocialFormSchema from './social-form/useSocialFormSchema.js';
 import { socialFormSubmitApi } from './social-form/api/socialform.api.js';
 import LanguageSwitcher from '../components/LanguageSwitcher.jsx';
+import clsx from 'clsx';
 
 const FormLeft = lazy(() => import('./social-form/FormLeft.jsx'));
 const SituationDescriptionsForm = lazy(
@@ -40,11 +52,12 @@ function getStepContent(step) {
 
 export default function FormPage() {
   const theme = useTheme();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const formSchema = useSocialFormSchema(activeStep);
+  const isDesktop = useMediaQuery((theme) => theme.breakpoints.up('md'));
 
   const form = useForm({
     resolver: yupResolver(formSchema), // attach defined schema here
@@ -116,8 +129,16 @@ export default function FormPage() {
     <ErrorBoundary>
       <SuspenseWrapper>
         <Grid container columns={16} height="100vh" spacing={0}>
-          <FormLeft />
-          <Grid size={11} className="bg-gray-100" padding={5} spacing={3}>
+          {isDesktop && <FormLeft />}
+          <Grid
+            size={11}
+            className="bg-gray-100"
+            padding={3}
+            paddingTop={1}
+            paddingRight={5}
+            paddingLeft={10}
+            spacing={3}
+          >
             <Stack direction={'row'}>
               <div className="flex flex-1">
                 {submitted && <Alert severity="success">{t('form.sent')}</Alert>}
@@ -126,12 +147,21 @@ export default function FormPage() {
             </Stack>
 
             <Stepper activeStep={activeStep} />
+            <Typography
+              className={clsx(
+                'font-semibold sm:text-[20px] mt-10',
+                i18n.language === 'ar' ? 'alexandria' : '',
+              )}
+              component="h2"
+            >
+              {t('form.formInfo')}
+            </Typography>
 
-            <Paper className="p-4 border mt-10 border-gray-100 relative" elevation={0}>
+            <Paper className="p-4 border mt-5 border-gray-100 relative" elevation={0}>
               <FormProvider {...form}>
                 <ErrorAlert />
                 <form onSubmit={onSubmit} onReset={handleReset} className="grid gap-4">
-                  <Grid container direction={'column'} spacing={form.formState.errors ? 2 : 3}>
+                  <Grid container direction={'column'} spacing={2}>
                     <Box className="min-h-120">
                       <ErrorBoundary>
                         <SuspenseWrapper>{getStepContent(activeStep)}</SuspenseWrapper>

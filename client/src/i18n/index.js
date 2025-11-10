@@ -16,7 +16,7 @@ const resources = {
       form: {
         title: 'Social Support Portal',
         subtitle: 'Get the financial support you need.',
-        formInfo: 'Let’s Begin with Your Information',
+        formInfo: 'Let’s start by gathering your information.',
         imageAlt:
           "Vector illustration of three diverse people, including a woman in a hijab and a man in a wheelchair, sitting at a table in front of a large 'Financial Assistance Portal' user interface",
         personalInformation: 'Personal Information',
@@ -123,6 +123,7 @@ const resources = {
       form: {
         title: 'بوابة الدعم الاجتماعي',
         subtitle: 'احصل على الدعم المالي الذي تحتاجه.',
+        formInfo: 'لنبدأ بمعلوماتك',
         imageAlt:
           "رسم توضيحي متجه لثلاثة أشخاص متنوعين، بما في ذلك امرأة محجبة ورجل على كرسي متحرك، يجلسون على طاولة أمام واجهة مستخدم كبيرة 'لبوابة المساعدة المالية'",
         personalInformation: 'المعلومات الشخصية',

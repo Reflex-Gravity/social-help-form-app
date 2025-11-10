@@ -8,7 +8,7 @@ export const brand = {
   600: '#92722A',
   700: '#7C5E24',
   800: '#6C4527',
-  900: '#5D3B2',
+  900: '#5D3B2F',
 };
 
 export const gray = brand;

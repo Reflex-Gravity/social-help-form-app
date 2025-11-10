@@ -10,17 +10,15 @@ function ErrorAlert() {
     formState: { errors },
   } = useFormContext();
 
-  if (!Object.keys(errors).length) {
-    return null;
-  }
-
   return (
     <div ref={containerRef}>
-      <Slide in unmountOnExit container={containerRef.current}>
-        <Alert severity="error" className="mb-3">
-          {t('form.errors.generic')}
-        </Alert>
-      </Slide>
+      {Object.keys(errors).length ? (
+        <Slide in unmountOnExit container={containerRef.current}>
+          <Alert severity="error" className="mb-3">
+            {t('form.errors.generic')}
+          </Alert>
+        </Slide>
+      ) : null}
     </div>
   );
 }

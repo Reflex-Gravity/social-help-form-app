@@ -102,7 +102,7 @@ export const navigationCustomizations = {
   MuiStepConnector: {
     styleOverrides: {
       line: ({ theme }) => ({
-        borderTop: '1px solid',
+        borderTop: '2px solid',
         borderColor: (theme.vars || theme).palette.divider,
         flex: 1,
         borderRadius: '99px',
@@ -111,11 +111,11 @@ export const navigationCustomizations = {
   },
   MuiStepIcon: {
     styleOverrides: {
-      root: ({ theme }) => ({
+      root: () => ({
         color: 'transparent',
-        border: `1px solid ${gray[400]}`,
-        width: 12,
-        height: 12,
+        border: `2px solid ${gray[400]}`,
+        width: 15,
+        height: 15,
         borderRadius: '50%',
         '& text': {
           display: 'none',
@@ -128,17 +128,6 @@ export const navigationCustomizations = {
           border: 'none',
           color: '#4A9D5C',
         },
-        ...theme.applyStyles('dark', {
-          border: `1px solid ${gray[700]}`,
-          '&.Mui-active': {
-            border: 'none',
-            color: (theme.vars || theme).palette.primary.light,
-          },
-          '&.Mui-completed': {
-            border: 'none',
-            color: (theme.vars || theme).palette.success.light,
-          },
-        }),
         variants: [
           {
             props: { completed: true },

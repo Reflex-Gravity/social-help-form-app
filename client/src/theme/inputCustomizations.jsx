@@ -9,7 +9,7 @@ export const inputsCustomizations = {
   MuiCircularProgress: {
     styleOverrides: {
       root: () => ({
-        color: '#1a90ff',
+        color: brand[400],
         animationDuration: '550ms',
         [`& .${circularProgressClasses.circle}`]: {
           strokeLinecap: 'round',
@@ -31,8 +31,8 @@ export const inputsCustomizations = {
         boxSizing: 'border-box',
         transition: 'all 100ms ease-in',
         '&:focus-visible': {
-          outline: `3px solid ${alpha(theme.palette.primary.main, 0.5)}`,
-          outlineOffset: '2px',
+          outline: `2px solid ${alpha(brand[400], 0.5)}`,
+          // outlineOffset: '2px',
         },
       }),
     },
