@@ -12,6 +12,10 @@ router.use('/health', async (req, res) => {
   return res.status(200).send('OK');
 });
 
+router.post('/form-submit', async (req, res) => {
+  return res.status(200).json({ status: 'success', message: 'form submitted' });
+});
+
 router.post('/generate', async (req, res) => {
   try {
     const userMessage = req.body.prompt;

@@ -23,3 +23,25 @@ export async function generateDescription({ field, lang }) {
     throw new Error('Error in response');
   }
 }
+
+export async function socialFormSubmitApi({ formData }) {
+  try {
+    const url = `${API_BASE}/api/form-submit`;
+    if (!formData) {
+      throw new Error('Fill the necessary details');
+    }
+
+    const response = await fetchController(url, { data: formData });
+
+    if (response.status === 'success' && typeof response.message === 'string') {
+      return response.message;
+    } else {
+      store.dispatch(showNotification({ message: response.message, severity: 'error' }));
+      throw new Error('Error in response');
+    }
+  } catch (error) {
+    store.dispatch(showNotification({ message: error.message, severity: 'error' }));
+    logEvent(LogLevel.error, 'socialFormSubmitApi failed', error);
+    throw new Error('Error in response');
+  }
+}
