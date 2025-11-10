@@ -4,7 +4,7 @@ import { initReactI18next } from 'react-i18next';
 const resources = {
   en: {
     translation: {
-      app: { title: '', loading: 'Loading...' },
+      app: { title: 'Social App', loading: 'Loading...' },
       nav: { home: 'Home', form: 'Form' },
       buttons: {
         reset: 'Reset',
@@ -14,7 +14,13 @@ const resources = {
         submit: 'Submit',
       },
       form: {
-        title: 'Social Support Application',
+        title: 'Social Support Portal',
+        subtitle: 'Get the financial support you need.',
+        imageAlt:
+          "Vector illustration of three diverse people, including a woman in a hijab and a man in a wheelchair, sitting at a table in front of a large 'Financial Assistance Portal' user interface",
+        personalInformation: 'Personal Information',
+        familyFinancialInfo: 'Family & Financial Info',
+        situationDescription: 'Situation Descriptions',
         name: 'Name',
         email: 'Email',
         gender: 'Gender',

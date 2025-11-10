@@ -3,7 +3,6 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
 import rtlPlugin from 'stylis-plugin-rtl';
-import { prefixer } from 'stylis';
 import { StyledEngineProvider } from '@mui/material/styles';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import { inputsCustomizations } from './inputCustomizations.jsx';
@@ -36,7 +35,7 @@ function AppTheme({ children }) {
       direction,
       typography: {
         fontFamily: [
-          'Lato',
+          lang === 'ar' ? 'Noto Kufi Arabic' : 'Kumbh Sans',
           '-apple-system',
           'BlinkMacSystemFont',
           '"Segoe UI"',
@@ -50,7 +49,7 @@ function AppTheme({ children }) {
         ...navigationCustomizations,
       },
     });
-  }, [direction]);
+  }, [direction, lang]);
 
   return (
     <StyledEngineProvider enableCssLayer>

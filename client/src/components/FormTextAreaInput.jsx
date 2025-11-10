@@ -46,7 +46,6 @@ function FormTextareaInput({
             <TextareaAutosize
               {...field}
               value={field.value ?? ''}
-              id={name}
               minRows={minRows}
               maxRows={maxRows}
               placeholder={placeholder}
@@ -62,9 +61,7 @@ function FormTextareaInput({
               }}
               {...textareaProps}
             />
-            {errors[name] && (
-              <FormHelperText error>{t(`form.errors[${errors[name]?.message}]`)}</FormHelperText>
-            )}
+            {errors[name] && <FormHelperText error>{errors[name]?.message}</FormHelperText>}
           </>
         )}
       />

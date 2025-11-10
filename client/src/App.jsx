@@ -9,7 +9,6 @@ import { useSelector } from 'react-redux';
 import { getLanguageDir } from './lib/library.functions.js';
 
 const FormPage = lazy(() => import('./pages/Form.jsx'));
-const MainForm = lazy(() => import('./pages/social-form/MainForm.jsx'));
 const NotFound = lazy(() => import('./pages/NotFound.jsx'));
 
 function App() {
@@ -30,9 +29,7 @@ function App() {
       <SuspenseWrapper>
         <Routes>
           <Route element={<MainLayout />}>
-            <Route index element={<Home />} />
-            <Route path="form" element={<FormPage />} />
-            <Route path="form-new" element={<MainForm />} />
+            <Route index element={<FormPage />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

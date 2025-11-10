@@ -1,21 +1,6 @@
 import { lazy, useCallback, useState } from 'react';
 import { useForm, Controller, FormProvider } from 'react-hook-form';
-import {
-  Alert,
-  Box,
-  Button,
-  CircularProgress,
-  FormLabel,
-  Grid,
-  MenuItem,
-  MobileStepper,
-  OutlinedInput,
-  Paper,
-  Stack,
-  TextField,
-  Typography,
-  useTheme,
-} from '@mui/material';
+import { Alert, Box, Button, Grid, MobileStepper, Paper, Stack, useTheme } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
@@ -29,7 +14,9 @@ import { useFormPersist } from '../hooks/useFormPersist.jsx';
 import ErrorAlert from './social-form/components/ErrorAlert.jsx';
 import useSocialFormSchema from './social-form/useSocialFormSchema.js';
 import { socialFormSubmitApi } from './social-form/api/socialform.api.js';
+import LanguageSwitcher from '../components/LanguageSwitcher.jsx';
 
+const FormLeft = lazy(() => import('./social-form/FormLeft.jsx'));
 const SituationDescriptionsForm = lazy(
   () => import('./social-form/components/SituationDescriptionsForm.jsx'),
 );
@@ -125,98 +112,121 @@ export default function FormPage() {
   }, [form]);
 
   return (
-    <Stack spacing={3}>
-      <Typography variant="h4" component="h1">
-        {t('form.title')}
-      </Typography>
+    <ErrorBoundary>
+      <SuspenseWrapper>
+        <Grid container columns={16} height="100vh" spacing={0}>
+          <FormLeft />
+          <Grid size={11} className="bg-gray-100" padding={5} spacing={3}>
+            <Stack direction={'row'}>
+              <div className="flex flex-1">
+                {submitted && <Alert severity="success">{t('form.sent')}</Alert>}
+              </div>
+              <LanguageSwitcher />
+            </Stack>
 
-      {submitted && <Alert severity="success">{t('form.sent')}</Alert>}
+            <Stepper activeStep={activeStep} />
 
-      <Stepper activeStep={activeStep} />
+            <Paper className="p-4 border mt-10 border-gray-100 relative" elevation={0}>
+              <FormProvider {...form}>
+                <ErrorAlert />
+                <form onSubmit={onSubmit} onReset={handleReset} className="grid gap-4">
+                  <Grid container direction={'column'} spacing={3}>
+                    <Box className="min-h-120">
+                      <ErrorBoundary>
+                        <SuspenseWrapper>{getStepContent(activeStep)}</SuspenseWrapper>
+                      </ErrorBoundary>
+                    </Box>
 
-      <Paper className="p-4 pt-0" elevation={0}>
-        <FormProvider {...form}>
-          <ErrorAlert />
-          <form onSubmit={onSubmit} onReset={handleReset} className="grid gap-4">
-            <Grid container direction={'column'} spacing={3}>
-              <ErrorBoundary>
-                <SuspenseWrapper>{getStepContent(activeStep)}</SuspenseWrapper>
-              </ErrorBoundary>
-              <Box
-                sx={[
-                  {
-                    display: { xs: 'none', md: 'flex' },
-                    flexDirection: { xs: 'column-reverse', sm: 'row' },
-                    alignItems: 'end',
-                    flexGrow: 1,
-                    gap: 1,
-                    justifyContent: 'space-between',
-                  },
-                ]}
-              >
-                <Button
-                  type="reset"
-                  color="inherit"
-                  variant="contained"
-                  sx={{ display: { xs: 'none', sm: 'flex' } }}
-                >
-                  {t('buttons.reset')}
-                </Button>
-                {activeStep !== 0 && (
-                  <Button
-                    startIcon={<ChevronLeftRoundedIcon />}
-                    onClick={handleBack}
-                    variant="text"
-                    sx={{ display: { xs: 'none', sm: 'flex' } }}
-                  >
-                    {t('buttons.back')}
-                  </Button>
-                )}
-                {activeStep !== 2 && (
-                  <Button
-                    variant="contained"
-                    endIcon={<ChevronRightRoundedIcon />}
-                    onClick={handleNext}
-                    sx={{ width: { xs: '100%', sm: 'fit-content' } }}
-                  >
-                    {t('buttons.next')}
-                  </Button>
-                )}
-                {activeStep === 2 && (
-                  <Button
-                    variant="contained"
-                    type="submit"
-                    sx={{ width: { xs: '100%', sm: 'fit-content' } }}
-                  >
-                    {loading ? t('buttons.submitting') : t('buttons.submit')}
-                  </Button>
-                )}
-              </Box>
+                    <Box
+                      sx={[
+                        {
+                          display: { xs: 'none', md: 'flex' },
+                          flexDirection: { xs: 'column-reverse', sm: 'row' },
+                          alignItems: 'end',
+                          position: 'sticky',
+                          bottom: 0,
+                          flexGrow: 1,
+                          gap: 1,
+                          justifyContent: 'space-between',
+                        },
+                      ]}
+                    >
+                      <Button
+                        type="reset"
+                        color="inherit"
+                        variant="contained"
+                        sx={{ display: { xs: 'none', sm: 'flex' } }}
+                      >
+                        {t('buttons.reset')}
+                      </Button>
+                      <Stack direction="row">
+                        {activeStep !== 0 && (
+                          <Button
+                            startIcon={<ChevronLeftRoundedIcon />}
+                            onClick={handleBack}
+                            variant="text"
+                            sx={{ display: { xs: 'none', sm: 'flex' } }}
+                          >
+                            {t('buttons.back')}
+                          </Button>
+                        )}
+                        {activeStep !== 2 && (
+                          <Button
+                            variant="contained"
+                            endIcon={<ChevronRightRoundedIcon />}
+                            onClick={handleNext}
+                            sx={{ width: { xs: '100%', sm: 'fit-content' } }}
+                          >
+                            {t('buttons.next')}
+                          </Button>
+                        )}
+                        {activeStep === 2 && (
+                          <Button
+                            variant="contained"
+                            type="submit"
+                            sx={{ width: { xs: '100%', sm: 'fit-content' } }}
+                          >
+                            {loading ? t('buttons.submitting') : t('buttons.submit')}
+                          </Button>
+                        )}
+                      </Stack>
+                    </Box>
 
-              <Box sx={{ display: { md: 'none' } }}>
-                <MobileStepper
-                  variant="text"
-                  steps={3}
-                  position="static"
-                  activeStep={activeStep}
-                  nextButton={
-                    <Button size="small" onClick={handleNext} disabled={activeStep === 3 - 1}>
-                      {t('buttons.next')}
-                      {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-                    </Button>
-                  }
-                  backButton={
-                    <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-                      {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-                      {t('buttons.back')}
-                    </Button>
-                  }
-                />
-              </Box>
-            </Grid>
-          </form>
-        </FormProvider>
-      </Paper>
-    </Stack>
+                    <Box sx={{ display: { md: 'none' } }}>
+                      <MobileStepper
+                        variant="text"
+                        steps={3}
+                        position="sticky"
+                        activeStep={activeStep}
+                        nextButton={
+                          <Button size="small" onClick={handleNext} disabled={activeStep === 3 - 1}>
+                            {t('buttons.next')}
+                            {theme.direction === 'rtl' ? (
+                              <KeyboardArrowLeft />
+                            ) : (
+                              <KeyboardArrowRight />
+                            )}
+                          </Button>
+                        }
+                        backButton={
+                          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+                            {theme.direction === 'rtl' ? (
+                              <KeyboardArrowRight />
+                            ) : (
+                              <KeyboardArrowLeft />
+                            )}
+                            {t('buttons.back')}
+                          </Button>
+                        }
+                      />
+                    </Box>
+                  </Grid>
+                </form>
+              </FormProvider>
+            </Paper>
+          </Grid>
+        </Grid>
+      </SuspenseWrapper>
+    </ErrorBoundary>
   );
 }

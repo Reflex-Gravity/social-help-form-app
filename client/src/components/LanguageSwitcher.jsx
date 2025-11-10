@@ -16,10 +16,10 @@ export default function LanguageSwitcher() {
       color="primary"
       onClick={toggle}
       variant="text"
-      className="font-bold border text-blue-950"
+      className="font-bold border text-amber-950 noto-kufi-arabic"
       startIcon={<Icon>language</Icon>}
     >
-      {i18n.language === 'en' ? 'Arabic' : 'English'}
+      {i18n.language === 'en' ? 'العربية' : 'English'}
     </Button>
   );
 }

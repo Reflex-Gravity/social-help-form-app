@@ -1,12 +1,23 @@
-import { Box, Step, StepLabel, Stepper } from '@mui/material';
-import React from 'react';
-
-const steps = ['Personal Information', 'Family & Financial Info', 'Situation Descriptions'];
+import { Box, Paper, Step, StepLabel, Stepper, Typography, useMediaQuery } from '@mui/material';
+import React, { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 function StepperWrapper({ activeStep }) {
+  const isDesktop = useMediaQuery((theme) => theme.breakpoints.up('md'));
+
+  const { t } = useTranslation();
+  const steps = useMemo(
+    () => [
+      t('form.personalInformation'),
+      t('form.familyFinancialInfo'),
+      t('form.situationDescription'),
+    ],
+    [t],
+  );
+
   return (
-    <Box>
-      <Box>
+    <Box className="mt-5 border-dashed border-neutral-300 border-2 p-4 rounded-xl">
+      {isDesktop ? (
         <Stepper activeStep={activeStep}>
           {steps.map((label) => (
             <Step key={label}>
@@ -14,7 +25,9 @@ function StepperWrapper({ activeStep }) {
             </Step>
           ))}
         </Stepper>
-      </Box>
+      ) : (
+        <Typography>{steps[activeStep]}</Typography>
+      )}
     </Box>
   );
 }

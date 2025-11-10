@@ -7,3 +7,7 @@ body,
 #root {
   height: 100%;
 }
+
+.bg-mild-orange {
+  background-color: #f0eee4;
+}

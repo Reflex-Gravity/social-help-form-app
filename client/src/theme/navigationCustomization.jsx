@@ -122,11 +122,11 @@ export const navigationCustomizations = {
         },
         '&.Mui-active': {
           border: 'none',
-          color: (theme.vars || theme).palette.primary.main,
+          color: gray[800],
         },
         '&.Mui-completed': {
           border: 'none',
-          color: (theme.vars || theme).palette.success.main,
+          color: '#4A9D5C',
         },
         ...theme.applyStyles('dark', {
           border: `1px solid ${gray[700]}`,
