@@ -11,7 +11,7 @@ import { DATE_FORMAT, STORAGE_FORMAT } from '../lib/constants';
  * @param {{label: string, name: string, datePickerProps: DatePickerProps }} { label, name, datePickerProps }
  * @return {*}
  */
-function FormDateInput({ label, name, datePickerProps }) {
+function FormDateInput({ label, name, datePickerProps, required }) {
   const {
     fieldState: { error },
     field,
@@ -19,7 +19,7 @@ function FormDateInput({ label, name, datePickerProps }) {
 
   return (
     <FormGrid size={{ xs: 12, md: 6 }}>
-      <FormLabel htmlFor={name} required>
+      <FormLabel id={`field-label-${name}`} htmlFor={`field-${name}`} required={required}>
         {label}
       </FormLabel>
 

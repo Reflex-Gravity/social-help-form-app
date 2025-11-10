@@ -10,14 +10,21 @@ function FormInput({ field, label, name, placeholder }) {
 
   return (
     <FormGrid size={{ xs: 12, md: 6 }}>
-      <FormLabel htmlFor={name} required>
+      <FormLabel id={`field-label-${name}`} htmlFor={`field-${name}`} required>
         {label}
       </FormLabel>
-      <OutlinedInput aria-describedby={name} {...field} {...fieldProps} placeholder={placeholder} />
+      <OutlinedInput
+        autoComplete="true"
+        id={`field-${name}`}
+        aria-describedby={`field-label-${name}`}
+        aria-label={label}
+        aria-labelledby={`field-label-${name}`}
+        {...field}
+        {...fieldProps}
+        placeholder={placeholder}
+      />
       <Grow in={!!error} unmountOnExit>
-        <FormHelperText id={name} error={!!error}>
-          {error?.message}
-        </FormHelperText>
+        <FormHelperText error={!!error}>{error?.message}</FormHelperText>
       </Grow>
     </FormGrid>
   );

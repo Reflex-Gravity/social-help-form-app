@@ -25,14 +25,24 @@ export default function FormSelectInput({ name, placeholder, label, required, op
 
   return (
     <FormGrid size={{ xs: 12, md: 6 }}>
-      <FormLabel required={required} htmlFor={name}>
+      <FormLabel required={required} id={`field-label-${name}`} htmlFor={`field-${name}`}>
         {label}
       </FormLabel>
       <Controller
         name={name}
         control={control}
         render={({ field }) => (
-          <Select {...field} value={field.value} error={!!errors[name]} displayEmpty>
+          <Select
+            id={`field-${name}`}
+            labelId={`field-label-${name}`}
+            aria-describedby={`field-label-${name}`}
+            aria-label={label}
+            aria-labelledby={`field-label-${name}`}
+            {...field}
+            value={field.value}
+            error={!!errors[name]}
+            displayEmpty
+          >
             {placeholder && (
               <MenuItem value="" disabled>
                 {placeholder}

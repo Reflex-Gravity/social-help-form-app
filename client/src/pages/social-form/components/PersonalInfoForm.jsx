@@ -13,7 +13,12 @@ function PersonalInfoForm() {
     <Grid container spacing={3}>
       <FormInput name="name" label={t('form.name')} />
       <FormInput name="nationalId" label={t('form.nationalId')} />
-      <FormDateInput name="dob" label={t('form.dob')} datePickerProps={{ disableFuture: true }} />
+      <FormDateInput
+        name="dob"
+        label={t('form.dob')}
+        datePickerProps={{ disableFuture: true }}
+        required
+      />
       <FormSelectInput
         name="gender"
         label={t('form.gender')}

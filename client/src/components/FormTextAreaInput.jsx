@@ -30,13 +30,17 @@ function FormTextareaInput({
   return (
     <FormGrid size={{ xs: 12 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <FormLabel htmlFor={name} required>
+        <FormLabel id={`field-label-${name}`} htmlFor={`field-${name}`} required>
           {label}
         </FormLabel>
         {aiButton}
       </Box>
 
       <TextareaAutosize
+        id={`field-${name}`}
+        aria-describedby={`field-label-${name}`}
+        aria-label={label}
+        aria-labelledby={`field-label-${name}`}
         {...field}
         minRows={minRows}
         maxRows={maxRows}
@@ -48,7 +52,6 @@ function FormTextareaInput({
           fontFamily: 'inherit',
           borderRadius: '4px',
           border: error ? '1px solid #d32f2f' : '1px solid rgba(0, 0, 0, 0.23)',
-          outline: 'none',
           resize: 'vertical',
         }}
         {...textareaProps}

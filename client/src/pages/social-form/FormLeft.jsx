@@ -20,8 +20,9 @@ function FormLeft() {
         <Stack padding={2} justifyContent="space-evenly">
           <Typography
             variant="h4"
+            textAlign={'left'}
             className={clsx(
-              'text-lg font-black sm:text-[40px] text-left',
+              'text-lg font-black sm:text-[40px]',
               i18n.language === 'ar' ? 'alexandria' : '',
             )}
             component="h2"
@@ -30,8 +31,9 @@ function FormLeft() {
           </Typography>
           <Typography
             variant="h5"
+            textAlign={'left'}
             className={clsx(
-              'font-black text-amber-900 text-[20px] text-left',
+              'font-black text-amber-900 text-[20px]',
               i18n.language === 'ar' ? 'alexandria' : '',
             )}
           >
