@@ -1,9 +1,19 @@
-import { Box, Paper, Step, StepLabel, Stepper, Typography, useMediaQuery } from '@mui/material';
+import {
+  Box,
+  Paper,
+  Stack,
+  Step,
+  StepIcon,
+  StepLabel,
+  Stepper,
+  Typography,
+  useMediaQuery,
+} from '@mui/material';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 function StepperWrapper({ activeStep }) {
-  const isDesktop = useMediaQuery((theme) => theme.breakpoints.up('md'));
+  const isDesktop = useMediaQuery((theme) => theme.breakpoints.up('lg'));
 
   const { t } = useTranslation();
   const steps = useMemo(
@@ -16,7 +26,7 @@ function StepperWrapper({ activeStep }) {
   );
 
   return (
-    <Box className="mt-5 border-dashed border-neutral-300 border-2 p-4 rounded-xl">
+    <Box flexGrow={0.8} className="border-dashed border-neutral-300 border-2 p-4 rounded-xl">
       {isDesktop ? (
         <Stepper activeStep={activeStep}>
           {steps.map((label) => (
@@ -26,7 +36,10 @@ function StepperWrapper({ activeStep }) {
           ))}
         </Stepper>
       ) : (
-        <Typography>{steps[activeStep]}</Typography>
+        <Stack flexDirection={'row'} alignItems={'center'}>
+          <span className="flex h-3 w-3 rounded-full bg-amber-800" />
+          <Typography className="font-bold ml-2">{steps[activeStep]}</Typography>
+        </Stack>
       )}
     </Box>
   );

@@ -4,7 +4,7 @@ import { initReactI18next } from 'react-i18next';
 const resources = {
   en: {
     translation: {
-      app: { title: 'Social App', loading: 'Loading...' },
+      app: { title: 'Social App', loading: 'Loading...', changeLanguage: 'Change Language' },
       nav: { home: 'Home', form: 'Form' },
       buttons: {
         reset: 'Reset',
@@ -108,6 +108,7 @@ const resources = {
       app: {
         title: 'تطبيق اجتماعي',
         loading: 'جاري التحميل...',
+        changeLanguage: 'تغيير اللغة',
       },
       nav: {
         home: 'الرئيسية',

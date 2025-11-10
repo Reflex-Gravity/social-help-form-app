@@ -14,14 +14,14 @@ function FormLeft() {
         height={'100vh'}
         sx={{
           justifyContent: 'space-around',
-          alignItems: 'center',
+          //   alignItems: 'center',
         }}
       >
-        <Stack alignItems="center" justifyContent="space-evenly">
+        <Stack padding={2} justifyContent="space-evenly">
           <Typography
             variant="h4"
             className={clsx(
-              'text-lg font-black sm:text-[40px] text-center',
+              'text-lg font-black sm:text-[40px] text-left',
               i18n.language === 'ar' ? 'alexandria' : '',
             )}
             component="h2"
@@ -29,8 +29,9 @@ function FormLeft() {
             {t('form.title')}
           </Typography>
           <Typography
+            variant="h5"
             className={clsx(
-              'text-md font-black text-amber-900 sm:text-[25px]',
+              'font-black text-amber-900 text-[20px] text-left',
               i18n.language === 'ar' ? 'alexandria' : '',
             )}
           >

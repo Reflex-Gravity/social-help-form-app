@@ -57,7 +57,7 @@ export default function FormPage() {
   const [submitted, setSubmitted] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const formSchema = useSocialFormSchema(activeStep);
-  const isDesktop = useMediaQuery((theme) => theme.breakpoints.up('md'));
+  const isDesktop = useMediaQuery((theme) => theme.breakpoints.up('lg'));
 
   const form = useForm({
     resolver: yupResolver(formSchema), // attach defined schema here
@@ -131,38 +131,42 @@ export default function FormPage() {
         <Grid container columns={16} height="100vh" spacing={0}>
           {isDesktop && <FormLeft />}
           <Grid
-            size={11}
+            size={{ lg: 11, xs: 16 }}
             className="bg-gray-100"
             padding={3}
             paddingTop={1}
-            paddingRight={5}
-            paddingLeft={10}
+            paddingRight={{ xs: 1, lg: 5 }}
+            paddingLeft={{ xs: 1, lg: 10 }}
             spacing={3}
           >
-            <Stack direction={'row'}>
-              <div className="flex flex-1">
-                {submitted && <Alert severity="success">{t('form.sent')}</Alert>}
-              </div>
+            <Stack
+              direction={'row'}
+              alignItems={'center'}
+              marginTop={2}
+              justifyItems={'center'}
+              justifyContent={'space-between'}
+            >
+              <Stepper activeStep={activeStep} />
               <LanguageSwitcher />
             </Stack>
 
-            <Stepper activeStep={activeStep} />
             <Typography
-              className={clsx(
-                'font-semibold sm:text-[20px] mt-10',
-                i18n.language === 'ar' ? 'alexandria' : '',
-              )}
-              component="h2"
+              marginTop={{ xs: 3, lg: 5 }}
+              fontSize={{ xs: 18, sm: 22 }}
+              className={clsx('font-semibold', i18n.language === 'ar' ? 'alexandria' : '')}
             >
               {t('form.formInfo')}
             </Typography>
 
             <Paper className="p-4 border mt-5 border-gray-100 relative" elevation={0}>
               <FormProvider {...form}>
+                <div className="flex flex-1">
+                  {submitted && <Alert severity="success">{t('form.sent')}</Alert>}
+                </div>
                 <ErrorAlert />
                 <form onSubmit={onSubmit} onReset={handleReset} className="grid gap-4">
                   <Grid container direction={'column'} spacing={2}>
-                    <Box className="min-h-120">
+                    <Box className="min-h-120" marginBottom={{ xs: 3, sm: 0 }}>
                       <ErrorBoundary>
                         <SuspenseWrapper>{getStepContent(activeStep)}</SuspenseWrapper>
                       </ErrorBoundary>
@@ -171,10 +175,9 @@ export default function FormPage() {
                     <Box
                       sx={[
                         {
-                          display: { xs: 'none', md: 'flex' },
+                          display: { xs: 'none', sm: 'flex' },
                           flexDirection: { xs: 'column-reverse', sm: 'row' },
                           alignItems: 'end',
-                          position: 'sticky',
                           bottom: 0,
                           flexGrow: 1,
                           gap: 1,
@@ -223,11 +226,13 @@ export default function FormPage() {
                       </Stack>
                     </Box>
 
-                    <Box sx={{ display: { md: 'none' } }}>
+                    <Box sx={{ display: { sm: 'none' } }}>
                       <MobileStepper
-                        variant="text"
+                        variant="dots"
                         steps={3}
-                        position="sticky"
+                        sx={{ display: { md: 'none' } }}
+                        classes={{ dotActive: 'bg-amber-800' }}
+                        position="bottom"
                         activeStep={activeStep}
                         nextButton={
                           <Button size="small" onClick={handleNext} disabled={activeStep === 3 - 1}>
