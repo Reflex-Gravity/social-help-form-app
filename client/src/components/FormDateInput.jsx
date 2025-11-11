@@ -35,6 +35,7 @@ function FormDateInput({ label, name, datePickerProps, required }) {
         }}
         enableAccessibleFieldDOMStructure={false}
         slotProps={{
+          textField: { onBlur: field.onBlur },
           openPickerButton: { className: 'border-0 bg-transparent' },
         }}
         {...datePickerProps}

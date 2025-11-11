@@ -8,6 +8,9 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, cwd(), '');
   return {
     plugins: [react({ include: /\.(js|jsx|ts|tsx)$/ }), tailwindcss()],
+    define: {
+      'import.meta.env.SERVER_URL': JSON.stringify(env.SERVER_URL),
+    },
     server: {
       port: Number(env.CLIENT_PORT) || 5173,
     },

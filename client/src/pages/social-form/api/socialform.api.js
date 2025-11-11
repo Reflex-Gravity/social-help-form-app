@@ -3,7 +3,7 @@ import { fetchController } from '../../../lib/fetchController';
 import store from '../../../store/store';
 import { showNotification } from '../../../store/notificationSlice';
 
-const API_BASE = import.meta.env.DEV ? 'http://localhost:3000' : '';
+const API_BASE = import.meta.env.DEV ? import.meta.env.SERVER_URL : '/';
 
 export async function generateDescription({ field, lang }) {
   try {

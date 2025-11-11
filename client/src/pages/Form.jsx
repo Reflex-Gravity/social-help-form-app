@@ -1,4 +1,4 @@
-import { lazy, useCallback, useState } from 'react';
+import { lazy, useCallback, useEffect, useState } from 'react';
 import { useForm, Controller, FormProvider } from 'react-hook-form';
 import {
   Alert,
@@ -56,8 +56,8 @@ export default function FormPage() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
-  const formSchema = useSocialFormSchema(activeStep);
   const isDesktop = useMediaQuery((theme) => theme.breakpoints.up('lg'));
+  const formSchema = useSocialFormSchema(activeStep);
 
   const form = useForm({
     resolver: yupResolver(formSchema), // attach defined schema here
@@ -85,9 +85,15 @@ export default function FormPage() {
     },
   });
 
+  useFormPersist('social-form', form.watch, form.setValue);
+
   const { reset, handleSubmit } = form;
 
-  useFormPersist('social-form', form.watch, form.setValue);
+  useEffect(() => {
+    if (Object.keys(form.formState.errors).length > 0) {
+      form.trigger();
+    }
+  }, [form, i18n.language]);
 
   const onSubmit = handleSubmit(async () => {
     setSubmitted(false);
