@@ -7,6 +7,17 @@ A fullstack monorepo containing:
 - client: React + Vite app
 - server: Express API with OpenAI integration
 
+## Tech Stack
+
+- Framework: React 19
+- UI Library: Material UI & Tailwind CSS
+- Form Handling: react-hook-form
+- State Management: Context API & Redux Toolkit
+- API Calls: Axios
+- Internationalization: React-i18next
+- Routing: React Router
+- Testing: vitest(Jest) & Testing Library
+
 ## Screenshots
 
 ![Desktop View](./screenshots/desktop.png)
