@@ -21,6 +21,7 @@ const resources = {
       },
       apiErrors: {
         generic: 'Request Failed',
+        ERROR_GENERIC: 'Unable to process the request',
         ERROR_500: 'Server is not responding. Please try again later.',
         ERROR_429: 'Too many requests. Please try again later.',
         ERROR_401: 'Session expired. Please login again.',
@@ -141,6 +142,7 @@ const resources = {
       },
       apiErrors: {
         generic: 'فشل الطلب',
+        ERROR_GENERIC: 'تعذرت معالجة الطلب',
         ERROR_500: 'الخادم لا يستجيب. يرجى المحاولة مرة أخرى لاحقًا.',
         ERROR_429: 'طلبات كثيرة جدًا. يرجى المحاولة مرة أخرى لاحقًا.',
         ERROR_401: 'انتهت صلاحية الجلسة. يرجى تسجيل الدخول مرة أخرى.',

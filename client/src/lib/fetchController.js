@@ -78,11 +78,6 @@ axiosInstance.interceptors.response.use(
   (error) => {
     const originalRequest = error.config;
 
-    // Prevent retry loops
-    if (!originalRequest || originalRequest._retry) {
-      return Promise.reject(error);
-    }
-
     // Handle network errors
     if (!error.response) {
       if (error.code === 'ECONNABORTED' || error.message.includes('timeout')) {
@@ -90,6 +85,7 @@ axiosInstance.interceptors.response.use(
         return Promise.reject(
           new ApiCustomError('Request timeout. Please try again.', {
             errorCode: i18n.t('apiErrors.ERROR_TIMEOUT'),
+            error,
           }),
         );
       }
@@ -99,11 +95,17 @@ axiosInstance.interceptors.response.use(
         return Promise.reject(
           new ApiCustomError('Network error. Check your connection.', {
             errorCode: i18n.t('apiErrors.ERROR_NETWORK'),
+            error,
           }),
         );
       }
 
-      return Promise.reject(new Error('Unable to reach server'));
+      return Promise.reject(
+        new ApiCustomError('Unable to reach the server.', {
+          errorCode: i18n.t('apiErrors.ERROR_GENERIC'),
+          error,
+        }),
+      );
     }
 
     const status = error.response.status;
@@ -114,6 +116,7 @@ axiosInstance.interceptors.response.use(
       return Promise.reject(
         new ApiCustomError('Session expired. Please login again.', {
           errorCode: i18n.t('apiErrors.ERROR_401'),
+          error,
         }),
       );
     }
@@ -123,6 +126,7 @@ axiosInstance.interceptors.response.use(
       return Promise.reject(
         new ApiCustomError('Too many requests. Please try again later.', {
           errorCode: i18n.t('apiErrors.ERROR_429'),
+          error,
         }),
       );
     }
@@ -132,6 +136,7 @@ axiosInstance.interceptors.response.use(
       return Promise.reject(
         new ApiCustomError('Server is not responding. Please try again later.', {
           errorCode: i18n.t('apiErrors.ERROR_500'),
+          error,
         }),
       );
     }
@@ -140,11 +145,16 @@ axiosInstance.interceptors.response.use(
     if (status === 400) {
       const message = error.response.data?.error || 'Invalid request data';
       return Promise.reject(
-        new ApiCustomError(message, { errorCode: i18n.t('apiErrors.ERROR_400') }),
+        new ApiCustomError(message, { errorCode: i18n.t('apiErrors.ERROR_400'), error }),
       );
     }
 
-    return Promise.reject(error);
+    return Promise.reject(
+      new ApiCustomError('Unable to process the request', {
+        errorCode: i18n.t('apiErrors.ERROR_GENERIC'),
+        error,
+      }),
+    );
   },
 );
 
