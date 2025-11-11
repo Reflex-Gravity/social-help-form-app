@@ -1,9 +1,16 @@
-# Social Support Application with AI Assistance — Setup Guide
+# Social Support Application with AI Assistance
+
+A responsive website with Arabic(RTL) support, and integrated OpenAI api.
 
 A fullstack monorepo containing:
 
 - client: React + Vite app
 - server: Express API with OpenAI integration
+
+## Screenshots
+
+![Desktop View](./screenshots/desktop.png)
+![Mobile View](./screenshots/mobile.png)
 
 ## Prerequisites
 
@@ -105,7 +112,7 @@ cd client && yarn test
 
 ## Architecture and Flow Diagram
 
-![architecture and flow diagram](./form-step-social-mapp.png)
+![architecture and flow diagram](./screenshots/form-step-social-mapp.png)
 
 ## Troubleshooting
 
