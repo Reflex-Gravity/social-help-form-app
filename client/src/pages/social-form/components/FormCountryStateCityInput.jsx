@@ -44,15 +44,10 @@ const countryData = {
 
 export default function CountryStateCity() {
   const { t } = useTranslation();
-  const {
-    watch,
-    setValue,
-    formState: { errors },
-  } = useFormContext();
+  const { watch, setValue } = useFormContext();
 
   const selectedCountry = watch('country');
   const selectedState = watch('state');
-  const selectedCity = watch('city');
 
   const countries = useMemo(() => Object.keys(countryData), []);
 
