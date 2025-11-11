@@ -11,6 +11,7 @@ A fullstack monorepo containing:
 
 ![Desktop View](./screenshots/desktop.png)
 ![Mobile View](./screenshots/mobile.png)
+![RTL Layout View](./screenshots/rtl_layout.png)
 
 ## Prerequisites
 
