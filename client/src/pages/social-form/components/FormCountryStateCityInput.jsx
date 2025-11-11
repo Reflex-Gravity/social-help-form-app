@@ -29,6 +29,17 @@ const countryData = {
       Scotland: ['Edinburgh', 'Glasgow', 'Aberdeen'],
     },
   },
+  'United Arab Emirates': {
+    states: {
+      'Abu Dhabi': ['Abu Dhabi', 'Al Ain', 'Madinat Zayed'],
+      Dubai: ['Dubai', 'Jebel Ali', 'Hatta'],
+      Sharjah: ['Sharjah', 'Khor Fakkan', 'Kalba'],
+      'Ras Al Khaimah': ['Ras Al Khaimah'],
+      Fujairah: ['Fujairah', 'Dibba Al-Fujairah'],
+      Ajman: ['Ajman', 'Masfout', 'Manama'],
+      'Umm Al Quwain': ['Umm Al Quwain'],
+    },
+  },
 };
 
 export default function CountryStateCity() {

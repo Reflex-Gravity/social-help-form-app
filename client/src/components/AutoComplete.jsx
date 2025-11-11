@@ -4,6 +4,21 @@ import { FormHelperText, FormLabel, Grow, OutlinedInput } from '@mui/material';
 import FormGrid from './FormGrid';
 import { useController } from 'react-hook-form';
 
+/**
+ * Autocomplete wrapper
+ *
+ * @export
+ * @param {{label: string, autoCompleteProps: import('@mui/material').AutocompleteProps}} {
+ *   label,
+ *   options,
+ *   required,
+ *   placeholder,
+ *   name,
+ *   autoCompleteProps,
+ *   onChange,
+ * }
+ * @return {*}
+ */
 export default function AutoComplete({
   label,
   options,
