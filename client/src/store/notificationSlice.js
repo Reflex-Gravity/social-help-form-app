@@ -10,6 +10,7 @@ const notificationSlice = createSlice({
       state.notifications.push({
         id: Date.now() + Math.random(),
         message: action.payload.message,
+        title: action.payload?.title || '',
         severity: action.payload.severity || 'info',
         duration: action.payload.duration || 3000,
       });

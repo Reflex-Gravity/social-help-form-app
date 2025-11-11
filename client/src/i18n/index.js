@@ -4,7 +4,12 @@ import { initReactI18next } from 'react-i18next';
 const resources = {
   en: {
     translation: {
-      app: { title: 'Social App', loading: 'Loading...', changeLanguage: 'Change Language' },
+      app: {
+        title: 'Social App',
+        loading: 'Loading...',
+        changeLanguage: 'Change Language',
+        errorBoundaryMessage: 'Uh-oh! We hit a snag. Don’t worry — we’re looking into it!',
+      },
       nav: { home: 'Home', form: 'Form' },
       buttons: {
         reset: 'Reset',
@@ -12,6 +17,17 @@ const resources = {
         back: 'Previous',
         changeLang: 'Change Language',
         submit: 'Submit',
+        tryAgain: 'Try Again',
+      },
+      apiErrors: {
+        generic: 'Request Failed',
+        ERROR_500: 'Server is not responding. Please try again later.',
+        ERROR_429: 'Too many requests. Please try again later.',
+        ERROR_401: 'Session expired. Please login again.',
+        ERROR_400: 'Invalid Request Data.',
+        ERROR_NETWORK:
+          'We are unable to detect a network connection. You may have been disconnected from the internet.',
+        ERROR_TIMEOUT: 'Request timeout. Please try again.',
       },
       form: {
         title: 'Social Support Portal',
@@ -109,6 +125,7 @@ const resources = {
         title: 'تطبيق اجتماعي',
         loading: 'جاري التحميل...',
         changeLanguage: 'تغيير اللغة',
+        errorBoundaryMessage: 'أوه! واجهنا مشكلة. لا تقلق، نحن نبحث في الأمر!',
       },
       nav: {
         home: 'الرئيسية',
@@ -120,6 +137,16 @@ const resources = {
         back: 'السابق',
         changeLang: 'تغيير اللغة',
         submit: 'إرسال',
+        tryAgain: 'حاول ثانية',
+      },
+      apiErrors: {
+        generic: 'فشل الطلب',
+        ERROR_500: 'الخادم لا يستجيب. يرجى المحاولة مرة أخرى لاحقًا.',
+        ERROR_429: 'طلبات كثيرة جدًا. يرجى المحاولة مرة أخرى لاحقًا.',
+        ERROR_401: 'انتهت صلاحية الجلسة. يرجى تسجيل الدخول مرة أخرى.',
+        ERROR_400: 'بيانات الطلب غير صالحة.',
+        ERROR_NETWORK: 'لا يمكننا اكتشاف اتصال بالشبكة. ربما تكون قد انقطعت عن الإنترنت.',
+        ERROR_TIMEOUT: 'انتهى وقت الطلب. يرجى المحاولة مرة أخرى.',
       },
       form: {
         title: 'بوابة الدعم الاجتماعي',

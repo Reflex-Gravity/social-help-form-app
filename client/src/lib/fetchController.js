@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { logEvent, LogLevel } from '../services/logger.service';
 import RateLimiter from '../services/rateLimitter.service';
+import i18n from '../i18n';
+import ApiCustomError from './ApiCustomError';
 
 // Environment validation
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
@@ -85,12 +87,20 @@ axiosInstance.interceptors.response.use(
     if (!error.response) {
       if (error.code === 'ECONNABORTED' || error.message.includes('timeout')) {
         console.error('Request timeout:', originalRequest.url);
-        return Promise.reject(new Error('Request timeout. Please try again.'));
+        return Promise.reject(
+          new ApiCustomError('Request timeout. Please try again.', {
+            errorCode: i18n.t('apiErrors.ERROR_TIMEOUT'),
+          }),
+        );
       }
 
       if (error.message === 'Network Error') {
         console.error('Network error:', originalRequest.url);
-        return Promise.reject(new Error('Network error. Check your connection.'));
+        return Promise.reject(
+          new ApiCustomError('Network error. Check your connection.', {
+            errorCode: i18n.t('apiErrors.ERROR_NETWORK'),
+          }),
+        );
       }
 
       return Promise.reject(new Error('Unable to reach server'));
@@ -101,23 +111,37 @@ axiosInstance.interceptors.response.use(
     // Handle 401 - Unauthorized
     if (status === 401) {
       localStorage.removeItem('token');
-      return Promise.reject(new Error('Session expired. Please login again.'));
+      return Promise.reject(
+        new ApiCustomError('Session expired. Please login again.', {
+          errorCode: i18n.t('apiErrors.ERROR_401'),
+        }),
+      );
     }
 
     // Handle 429 - Rate Limit with exponential backoff
     if (status === 429) {
-      return Promise.reject(new Error('Too many requests. Please try again later.'));
+      return Promise.reject(
+        new ApiCustomError('Too many requests. Please try again later.', {
+          errorCode: i18n.t('apiErrors.ERROR_429'),
+        }),
+      );
     }
 
     // Handle 500+ server errors with retry
     if (status >= 500) {
-      return Promise.reject(new Error('Server is not responding. Please try again later.'));
+      return Promise.reject(
+        new ApiCustomError('Server is not responding. Please try again later.', {
+          errorCode: i18n.t('apiErrors.ERROR_500'),
+        }),
+      );
     }
 
     // Handle validation errors (400)
     if (status === 400) {
       const message = error.response.data?.error || 'Invalid request data';
-      return Promise.reject(new Error(message));
+      return Promise.reject(
+        new ApiCustomError(message, { errorCode: i18n.t('apiErrors.ERROR_400') }),
+      );
     }
 
     return Promise.reject(error);

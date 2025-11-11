@@ -1,4 +1,4 @@
-import { Snackbar, Alert } from '@mui/material';
+import { Snackbar, Alert, AlertTitle } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { removeNotification } from '../store/notificationSlice';
 import store from '../store/store';
@@ -28,6 +28,7 @@ export default function Notifications() {
             severity={notification.severity}
             variant="standard"
           >
+            {notification.title ? <AlertTitle>{notification.title}</AlertTitle> : null}
             {notification.message}
           </Alert>
         </Snackbar>

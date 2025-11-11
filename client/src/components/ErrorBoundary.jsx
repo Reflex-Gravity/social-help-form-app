@@ -1,4 +1,5 @@
 import React from 'react';
+import { withTranslation } from 'react-i18next';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -17,13 +18,14 @@ class ErrorBoundary extends React.Component {
   }
 
   render() {
+    const { t } = this.props;
     if (this.state.hasError) {
       return (
         this.props.fallback || (
           <div style={{ padding: '20px', textAlign: 'center' }}>
-            <h2>Something went wrong</h2>
+            <h2>{t('app.errorBoundaryMessage')}</h2>
             <button onClick={() => this.setState({ hasError: false, error: null })}>
-              Try again
+              {t('buttons.tryAgain')}
             </button>
           </div>
         )
@@ -34,4 +36,5 @@ class ErrorBoundary extends React.Component {
   }
 }
 
-export default ErrorBoundary;
+const TranslatedErrorBoundary = withTranslation()(ErrorBoundary);
+export default TranslatedErrorBoundary;

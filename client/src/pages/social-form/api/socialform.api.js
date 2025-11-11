@@ -2,6 +2,7 @@ import { logEvent, LogLevel } from '../../../services/logger.service';
 import { fetchController } from '../../../lib/fetchController';
 import store from '../../../store/store';
 import { showNotification } from '../../../store/notificationSlice';
+import i18n from '../../../i18n';
 
 const API_BASE = import.meta.env.DEV ? import.meta.env.SERVER_URL : '/';
 
@@ -18,7 +19,13 @@ export async function generateDescription({ field, lang }) {
       throw new Error('Error in response');
     }
   } catch (error) {
-    store.dispatch(showNotification({ message: error.message, severity: 'error' }));
+    store.dispatch(
+      showNotification({
+        title: i18n.t('apiErrors.generic'),
+        message: error.errorCode,
+        severity: 'error',
+      }),
+    );
     logEvent(LogLevel.error, 'generateDescription failed', error);
     throw new Error('Error in response');
   }
