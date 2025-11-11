@@ -28,6 +28,7 @@ export default function AutoComplete({
         options={options}
         disablePortal
         onBlur={onBlur}
+        openOnFocus
         onChange={onChange}
         renderInput={(params) => <TextField {...params} placeholder={placeholder} />}
         {...autoCompleteProps}
