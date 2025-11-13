@@ -8,6 +8,7 @@ const resources = {
         title: 'Social App',
         loading: 'Loading...',
         changeLanguage: 'Change Language',
+        errorBoundaryHeader: 'Something went wrong',
         errorBoundaryMessage: 'Uh-oh! We hit a snag. Don’t worry — we’re looking into it!',
       },
       nav: { home: 'Home', form: 'Form' },

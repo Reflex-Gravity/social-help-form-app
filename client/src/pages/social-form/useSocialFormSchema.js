@@ -9,6 +9,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { useMemo } from 'react';
 import dayjs from 'dayjs';
+import { isPossiblePhoneNumber, isValidPhoneNumber } from 'react-phone-number-input';
 
 const getValFunc = (option) => option.value;
 
@@ -70,9 +71,11 @@ export default function useSocialFormSchema(activeStep) {
         .required(t('form.errors.addressRequired')),
       phone: yup
         .string()
+        .required(t('form.errors.phoneRequired'))
         .trim()
-        .matches(/^[0-9+()\s-]{7,18}$/, t('form.errors.validPhone'))
-        .required(t('form.errors.phoneRequired')),
+        .test('is-valid-phone', t('form.errors.validPhone'), function (value) {
+          return value ? isValidPhoneNumber(value) : false;
+        }),
       email: yup
         .string()
         .trim()

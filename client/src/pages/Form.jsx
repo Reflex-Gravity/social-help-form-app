@@ -236,6 +236,14 @@ export default function FormPage() {
                     </Box>
 
                     <Box sx={{ display: { sm: 'none' } }}>
+                      <Button
+                        sx={{ marginBottom: { xs: 3, sm: 0 } }}
+                        type="reset"
+                        color="inherit"
+                        variant="contained"
+                      >
+                        {t('buttons.reset')}
+                      </Button>
                       <MobileStepper
                         variant="dots"
                         steps={3}

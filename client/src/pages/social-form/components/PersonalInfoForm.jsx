@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import FormInput from '../../../components/FormInput';
 import { useTranslation } from 'react-i18next';
 import { Grid } from '@mui/material';
 import FormDateInput from '../../../components/FormDateInput';
 import FormSelectInput from '../../../components/FormSelectInput';
-import CountryStateCity from './FormCountryStateCityInput';
 import { genderOptions } from '../../../lib/constants';
+import FormPhone from '../../../components/FormPhone';
+
+const CountryStateCity = lazy(() => import('./FormCountryStateCityInput'));
 
 function PersonalInfoForm() {
   const { t } = useTranslation();
@@ -27,10 +29,9 @@ function PersonalInfoForm() {
         placeholder={t('form.selectGender')}
       />
       <FormInput name="address" label={t('form.address')} field={{ multiline: true }} />
-      <FormInput name="phone" label={t('form.phone')} field={{ multiline: true }} />
+      <FormPhone name="phone" label={t('form.phone')} required />
       <FormInput name="email" label={t('form.email')} />
       <CountryStateCity />
-      {/* <FormInput name="Country" label={t('form.email')} /> */}
     </Grid>
   );
 }
