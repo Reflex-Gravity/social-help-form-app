@@ -121,11 +121,13 @@ export const navigationCustomizations = {
           display: 'none',
         },
         '&.Mui-active': {
-          border: 'none',
+          border: `2px solid ${gray[800]}`,
           color: gray[800],
         },
         '&.Mui-completed': {
-          border: 'none',
+          border: `2px solid #4A9D5C`,
+          width: 15,
+          height: 15,
           color: '#4A9D5C',
         },
         variants: [
@@ -143,7 +145,13 @@ export const navigationCustomizations = {
   MuiStepLabel: {
     styleOverrides: {
       label: ({ theme }) => ({
+        fontSize: '20px',
+        '&.Mui-active': {
+          fontSize: '20px',
+          fontWeight: 700,
+        },
         '&.Mui-completed': {
+          fontWeight: 700,
           opacity: 0.6,
           ...theme.applyStyles('dark', { opacity: 0.5 }),
         },
