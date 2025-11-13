@@ -1,5 +1,5 @@
 import { lazy, useCallback, useEffect, useState } from 'react';
-import { useForm, Controller, FormProvider } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
 import {
   Alert,
   Box,
@@ -55,12 +55,15 @@ export default function FormPage() {
   const { t, i18n } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(() =>
+    // pre-fill saved active step
+    Number(localStorage.getItem(`socialform-activeStep`) ?? 0),
+  );
   const isDesktop = useMediaQuery((theme) => theme.breakpoints.up('lg'));
   const formSchema = useSocialFormSchema(activeStep);
 
   const form = useForm({
-    resolver: yupResolver(formSchema), // attach defined schema here
+    resolver: yupResolver(formSchema),
     shouldFocusError: true,
     mode: 'onBlur',
     defaultValues: {
@@ -99,7 +102,8 @@ export default function FormPage() {
     setSubmitted(false);
     setLoading(true);
     try {
-      const isValid = await form.trigger(); // validates all fields
+      // validates all fields
+      const isValid = await form.trigger();
 
       if (isValid) {
         const formData = form.getValues();
@@ -108,6 +112,7 @@ export default function FormPage() {
         setSubmitted(true);
         reset();
         setActiveStep(0);
+        localStorage.setItem(`socialform-activeStep`, 0);
       }
     } catch {
       //
@@ -120,10 +125,12 @@ export default function FormPage() {
     const isValid = await form.trigger(); // validates all fields
     if (isValid) {
       setActiveStep(activeStep + 1);
+      localStorage.setItem(`socialform-activeStep`, activeStep + 1);
     }
   };
   const handleBack = () => {
     setActiveStep(activeStep - 1);
+    localStorage.setItem(`socialform-activeStep`, activeStep - 1);
   };
 
   const handleReset = useCallback(() => {

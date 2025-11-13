@@ -33,6 +33,7 @@ function FormPhone({ label, name, required }) {
         id={`field-${name}`}
         aria-describedby={`field-label-${name}`}
         aria-label={label}
+        inputProps={{ dir: i18n.language === 'ar' ? 'rtl' : null }}
         aria-labelledby={`field-label-${name}`}
         inputComponent={PhoneInputComponent}
       />

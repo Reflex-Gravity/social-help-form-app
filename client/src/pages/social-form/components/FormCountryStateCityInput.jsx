@@ -9,11 +9,15 @@ import { useTranslation } from 'react-i18next';
 
 // In production, use a package like 'country-state-city' or fetch from API
 const countryData = {
-  USA: {
+  'United Arab Emirates': {
     states: {
-      California: ['Los Angeles', 'San Francisco', 'San Diego'],
-      Texas: ['Houston', 'Dallas', 'Austin'],
-      'New York': ['New York City', 'Buffalo', 'Albany'],
+      'Abu Dhabi': ['Abu Dhabi', 'Al Ain', 'Madinat Zayed'],
+      Dubai: ['Dubai', 'Jebel Ali', 'Hatta'],
+      Sharjah: ['Sharjah', 'Khor Fakkan', 'Kalba'],
+      'Ras Al Khaimah': ['Ras Al Khaimah'],
+      Fujairah: ['Fujairah', 'Dibba Al-Fujairah'],
+      Ajman: ['Ajman', 'Masfout', 'Manama'],
+      'Umm Al Quwain': ['Umm Al Quwain'],
     },
   },
   India: {
@@ -29,15 +33,11 @@ const countryData = {
       Scotland: ['Edinburgh', 'Glasgow', 'Aberdeen'],
     },
   },
-  'United Arab Emirates': {
+  USA: {
     states: {
-      'Abu Dhabi': ['Abu Dhabi', 'Al Ain', 'Madinat Zayed'],
-      Dubai: ['Dubai', 'Jebel Ali', 'Hatta'],
-      Sharjah: ['Sharjah', 'Khor Fakkan', 'Kalba'],
-      'Ras Al Khaimah': ['Ras Al Khaimah'],
-      Fujairah: ['Fujairah', 'Dibba Al-Fujairah'],
-      Ajman: ['Ajman', 'Masfout', 'Manama'],
-      'Umm Al Quwain': ['Umm Al Quwain'],
+      California: ['Los Angeles', 'San Francisco', 'San Diego'],
+      Texas: ['Houston', 'Dallas', 'Austin'],
+      'New York': ['New York City', 'Buffalo', 'Albany'],
     },
   },
 };

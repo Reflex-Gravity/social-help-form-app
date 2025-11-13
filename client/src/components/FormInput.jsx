@@ -2,7 +2,7 @@ import { FormHelperText, FormLabel, Grow, OutlinedInput } from '@mui/material';
 import { useController } from 'react-hook-form';
 import FormGrid from './FormGrid';
 
-function FormInput({ field, label, name, placeholder }) {
+function FormInput({ field, label, name, placeholder, type }) {
   const {
     fieldState: { error },
     field: fieldProps,
@@ -17,6 +17,7 @@ function FormInput({ field, label, name, placeholder }) {
         autoComplete="true"
         id={`field-${name}`}
         aria-describedby={`field-label-${name}`}
+        type={type || 'text'}
         aria-label={label}
         aria-labelledby={`field-label-${name}`}
         {...field}

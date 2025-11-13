@@ -30,7 +30,7 @@ function PersonalInfoForm() {
       />
       <FormInput name="address" label={t('form.address')} field={{ multiline: true }} />
       <FormPhone name="phone" label={t('form.phone')} required />
-      <FormInput name="email" label={t('form.email')} />
+      <FormInput name="email" type="email" label={t('form.email')} />
       <CountryStateCity />
     </Grid>
   );
