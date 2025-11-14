@@ -19,7 +19,7 @@ export default function NotFound() {
         variant="contained"
         component={RouterLink}
         to="/"
-        className="!normal-case mt-10"
+        className="normal-case mt-10"
         startIcon={<Icon>home</Icon>}
       >
         {t('notFound.goHome')}

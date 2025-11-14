@@ -1,5 +1,5 @@
 import { CircularProgress } from '@mui/material';
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 
 function SuspenseWrapper({ children }) {
   return (

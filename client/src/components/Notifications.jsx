@@ -9,6 +9,10 @@ const handleClose = (id) => (event, reason) => {
   store.dispatch(removeNotification(id));
 };
 
+/**
+ * Notification Center
+ * @returns
+ */
 export default function Notifications() {
   const notifications = useSelector((state) => state.notificationCenter.notifications);
 

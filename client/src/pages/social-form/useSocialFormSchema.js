@@ -9,7 +9,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { useMemo } from 'react';
 import dayjs from 'dayjs';
-import { isPossiblePhoneNumber, isValidPhoneNumber } from 'react-phone-number-input';
+import { isValidPhoneNumber } from 'react-phone-number-input';
 
 const getValFunc = (option) => option.value;
 

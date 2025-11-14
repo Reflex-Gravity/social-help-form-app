@@ -1,8 +1,6 @@
-import React from 'react';
-import FormInput from '../../../components/FormInput';
 import { useTranslation } from 'react-i18next';
 import { Grid } from '@mui/material';
-import FormTextareaInput from '../../../components/FormTextAreaInput';
+
 import FormTextareaWithAI from './FormTextareaWithAI';
 
 function SituationDescriptionsForm() {

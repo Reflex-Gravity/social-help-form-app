@@ -6,14 +6,12 @@ import {
   DialogContent,
   DialogActions,
   TextareaAutosize,
-  Box,
   CircularProgress,
-  Typography,
   Tooltip,
   Stack,
   Icon,
 } from '@mui/material';
-import { useController, useFormContext } from 'react-hook-form';
+import { useController } from 'react-hook-form';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import FormTextareaInput from '../../../components/FormTextAreaInput';
 import { generateDescription } from '../api/socialform.api';

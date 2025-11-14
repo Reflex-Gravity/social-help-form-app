@@ -1,11 +1,11 @@
 /* eslint-env browser */
 import { describe, test, expect } from 'vitest';
 import { renderHook } from '@testing-library/react';
-import { I18nextProvider } from 'react-i18next';
 import i18n from '../src/i18n/index.js';
 import useSocialFormSchema from '../src/pages/social-form/useSocialFormSchema.js';
+import I18nProvider from '../src/i18n/I18nProvider.js';
 
-const wrapper = ({ children }) => <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
+const wrapper = ({ children }) => <I18nProvider>{children}</I18nProvider>;
 
 describe('useSocialFormSchema validations', () => {
   test('english error messages', async () => {

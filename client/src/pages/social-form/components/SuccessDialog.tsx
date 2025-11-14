@@ -12,18 +12,10 @@ import { useTranslation } from 'react-i18next';
 
 interface SuccessDialogProps {
   applicationNo: string;
-  open: boolean;
   onClose: () => void;
-  title?: string;
-  message?: string;
 }
 
-export default function SuccessDialog({
-  onClose,
-  applicationNo,
-  title = 'Success!',
-  message = 'Your form has been submitted successfully.',
-}: SuccessDialogProps) {
+export default function SuccessDialog({ onClose, applicationNo }: SuccessDialogProps) {
   const { t } = useTranslation();
   return (
     <Dialog open onClose={onClose} maxWidth="xs" fullWidth>

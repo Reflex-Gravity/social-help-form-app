@@ -1,15 +1,5 @@
-import {
-  Box,
-  Paper,
-  Stack,
-  Step,
-  StepIcon,
-  StepLabel,
-  Stepper,
-  Typography,
-  useMediaQuery,
-} from '@mui/material';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
+import { Box, Stack, Step, StepLabel, Stepper, Typography, useMediaQuery } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 function StepperWrapper({ activeStep }) {

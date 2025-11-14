@@ -14,7 +14,6 @@ function FormLeft() {
         height={'100vh'}
         sx={{
           justifyContent: 'space-around',
-          //   alignItems: 'center',
         }}
       >
         <Stack padding={2} justifyContent="space-evenly">
