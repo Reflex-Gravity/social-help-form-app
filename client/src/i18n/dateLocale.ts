@@ -20,6 +20,7 @@ const views: Record<TimeViewWithMeridiem, string> = {
   meridiem: 'صباحاً/مساءً',
 };
 
+// Arabic Translations for DatePicker component.
 const arSAPickers: Partial<PickersLocaleText> = {
   // Calendar navigation
   previousMonth: 'الشهر السابق',
