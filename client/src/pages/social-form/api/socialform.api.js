@@ -40,7 +40,7 @@ export async function socialFormSubmitApi({ formData }) {
       throw new Error('Fill the necessary details');
     }
 
-    const response = await fetchController(url, { data: { formData } });
+    const response = await fetchController(url, { data: { formData }, timeout: 1000 });
 
     if (response.status === 'success' && typeof response.message === 'string') {
       return response.message;
