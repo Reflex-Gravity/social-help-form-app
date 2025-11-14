@@ -71,6 +71,7 @@ const resources = {
         helpMeWrite: 'Help Me Write',
         discard: 'Discard',
         accept: 'Accept',
+        regenerate: 'Re-Generate',
         smartHelpTooltip: 'Not sure what to write? Let AI help you.',
         errors: {
           generic: 'Please fill the required fields',
@@ -115,6 +116,7 @@ const resources = {
           reasonRequired: 'Reason is required',
         },
       },
+
       notFound: {
         title: 'Page not found',
         goHome: 'Go Home',

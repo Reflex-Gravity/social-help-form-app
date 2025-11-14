@@ -10,8 +10,10 @@ import {
   CircularProgress,
   Typography,
   Tooltip,
+  Stack,
+  Icon,
 } from '@mui/material';
-import { useFormContext } from 'react-hook-form';
+import { useController, useFormContext } from 'react-hook-form';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import FormTextareaInput from '../../../components/FormTextAreaInput';
 import { generateDescription } from '../api/socialform.api';
@@ -32,16 +34,20 @@ import i18n from '../../../i18n';
 function FormTextareaWithAI({ label, name, placeholder, minRows, maxRows, textareaProps }) {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
-  const [generatedContent, setGeneratedContent] = useState('');
   const [editedContent, setEditedContent] = useState('');
   const [loading, setLoading] = useState(false);
-  const { setValue } = useFormContext();
+  const {
+    field: { onChange, value },
+  } = useController({ name });
 
   const handleGenerate = useCallback(async () => {
     setLoading(true);
     try {
-      const content = await generateDescription({ field: label, lang: i18n.language });
-      setGeneratedContent(content);
+      const content = await generateDescription({
+        userPrompt: open ? editedContent : value, // incase popup is open considered editedContent, else form field
+        field: label,
+        lang: i18n.language,
+      });
       setEditedContent(content);
       setOpen(true);
     } catch (error) {
@@ -49,16 +55,15 @@ function FormTextareaWithAI({ label, name, placeholder, minRows, maxRows, textar
     } finally {
       setLoading(false);
     }
-  }, [label]);
+  }, [editedContent, label, open, value]);
 
-  const handleAccept = () => {
-    setValue(name, editedContent, { shouldValidate: true, shouldDirty: true });
+  const handleAccept = useCallback(() => {
+    onChange(editedContent);
     setOpen(false);
-  };
+  }, [editedContent, onChange]);
 
   const handleDiscard = () => {
     setOpen(false);
-    setGeneratedContent('');
     setEditedContent('');
   };
 
@@ -110,13 +115,27 @@ function FormTextareaWithAI({ label, name, placeholder, minRows, maxRows, textar
             }}
           />
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleDiscard} color="error">
-            {t('form.discard')}
+        <DialogActions className="justify-between">
+          <Button
+            className="self-start"
+            variant="outlined"
+            onClick={handleGenerate}
+            disabled={loading}
+            color="warning"
+            startIcon={
+              <Icon className={`text-yellow-600 ${loading ? 'animate-spin' : ''}`}>autorenew</Icon>
+            }
+          >
+            {loading ? t('form.generating') : t('form.regenerate')}
           </Button>
-          <Button onClick={handleAccept} variant="contained">
-            {t('form.accept')}
-          </Button>
+          <Stack flexDirection={'row'}>
+            <Button onClick={handleDiscard} color="error">
+              {t('form.discard')}
+            </Button>
+            <Button onClick={handleAccept} variant="contained">
+              {t('form.accept')}
+            </Button>
+          </Stack>
         </DialogActions>
       </Dialog>
     </>

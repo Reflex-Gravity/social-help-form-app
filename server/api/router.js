@@ -30,8 +30,7 @@ router.post('/form-submit', async (req, res) => {
 
 router.post('/generate', async (req, res) => {
   try {
-    const userMessage = req.body.prompt;
-    const lang = req.body.lang;
+    const { lang, prompt, field } = req.body;
 
     const completion = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
@@ -40,11 +39,12 @@ router.post('/generate', async (req, res) => {
       messages: [
         {
           role: 'system',
-          content: `I am unemployed with no income. Help me describe my financial hardship.
-          Use language: ${lang}
-          `,
+          content: `You are an expert in rephrasing, improvising, and generating sentences. Help the user is describing his situation: ${field}.
+          IMPORTANT: Keep the response elaborated, but in 6 sentences.
+          
+          Use language: ${lang}`,
         },
-        { role: 'user', content: userMessage },
+        { role: 'user', content: prompt },
       ],
     });
 

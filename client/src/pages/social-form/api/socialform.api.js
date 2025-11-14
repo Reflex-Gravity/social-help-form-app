@@ -6,11 +6,13 @@ import i18n from '../../../i18n';
 
 const API_BASE = import.meta.env.DEV ? import.meta.env.SERVER_URL : import.meta.env.SERVER_URL;
 
-export async function generateDescription({ field, lang }) {
+export async function generateDescription({ field, lang, userPrompt }) {
   try {
     const url = `${API_BASE}/api/generate`;
 
-    const response = await fetchController(url, { data: { prompt: field, lang } });
+    const response = await fetchController(url, {
+      data: { field, prompt: userPrompt, lang },
+    });
 
     if (response.status === 'success' && typeof response.message === 'string') {
       return response.message;
