@@ -268,14 +268,28 @@ export default function FormPage() {
                         position="bottom"
                         activeStep={activeStep}
                         nextButton={
-                          <Button size="small" onClick={handleNext} disabled={activeStep === 3 - 1}>
-                            {t('buttons.next')}
-                            {theme.direction === 'rtl' ? (
-                              <KeyboardArrowLeft />
-                            ) : (
-                              <KeyboardArrowRight />
-                            )}
-                          </Button>
+                          activeStep === 2 ? (
+                            <Button
+                              variant="contained"
+                              onClick={onSubmit}
+                              sx={{ width: { xs: 'fit-content' } }}
+                            >
+                              {loading ? t('buttons.submitting') : t('buttons.submit')}
+                            </Button>
+                          ) : (
+                            <Button
+                              size="small"
+                              onClick={handleNext}
+                              disabled={activeStep === 3 - 1}
+                            >
+                              {t('buttons.next')}
+                              {theme.direction === 'rtl' ? (
+                                <KeyboardArrowLeft />
+                              ) : (
+                                <KeyboardArrowRight />
+                              )}
+                            </Button>
+                          )
                         }
                         backButton={
                           <Button size="small" onClick={handleBack} disabled={activeStep === 0}>

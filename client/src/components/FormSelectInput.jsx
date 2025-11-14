@@ -48,7 +48,7 @@ export default function FormSelectInput({
             {...field}
             value={field.value}
             error={!!errors[name]}
-            displayEmpty
+            // displayEmpty
           >
             {placeholder && (
               <MenuItem value="" disabled>
