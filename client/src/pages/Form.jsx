@@ -136,6 +136,7 @@ export default function FormPage() {
 
   const handleReset = useCallback(() => {
     setActiveStep(0);
+    localStorage.setItem(`socialform-activeStep`, 0);
     form.clearErrors();
     form.reset();
   }, [form]);

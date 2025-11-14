@@ -25,6 +25,7 @@ function PersonalInfoForm() {
         name="gender"
         label={t('form.gender')}
         options={genderOptions}
+        labelRenderer={(option) => t(`genderOptions.${option.value}`)}
         required
         placeholder={t('form.selectGender')}
       />

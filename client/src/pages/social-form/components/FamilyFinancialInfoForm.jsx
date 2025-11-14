@@ -17,6 +17,7 @@ function FamilyFinancialInfoForm() {
       <FormSelectInput
         name="maritalStatus"
         label={t('form.maritalStatus')}
+        labelRenderer={(option) => t(`maritalStatus.${option.value}`)}
         options={maritialStatusOptions}
         required
       />
@@ -24,6 +25,7 @@ function FamilyFinancialInfoForm() {
       <FormSelectInput
         name="employmentStatus"
         label={t('form.employementStatus')}
+        labelRenderer={(option) => t(`employmentStatus.${option.value}`)}
         required
         options={employmentStatusOptions}
       />
@@ -31,6 +33,7 @@ function FamilyFinancialInfoForm() {
       <FormSelectInput
         name="housingStatus"
         required
+        labelRenderer={(option) => t(`housingStatus.${option.value}`)}
         label={t('form.housingStatus')}
         options={housingStatusOptions}
       />

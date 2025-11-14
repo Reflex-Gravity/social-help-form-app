@@ -9,35 +9,35 @@ import { useTranslation } from 'react-i18next';
 
 // In production, use a package like 'country-state-city' or fetch from API
 const countryData = {
-  'United Arab Emirates': {
+  uae: {
     states: {
-      'Abu Dhabi': ['Abu Dhabi', 'Al Ain', 'Madinat Zayed'],
-      Dubai: ['Dubai', 'Jebel Ali', 'Hatta'],
-      Sharjah: ['Sharjah', 'Khor Fakkan', 'Kalba'],
-      'Ras Al Khaimah': ['Ras Al Khaimah'],
-      Fujairah: ['Fujairah', 'Dibba Al-Fujairah'],
-      Ajman: ['Ajman', 'Masfout', 'Manama'],
-      'Umm Al Quwain': ['Umm Al Quwain'],
+      abu_dhabi: ['abu_dhabi', 'al_ain', 'madinat_zayed'],
+      dubai: ['dubai', 'jebel_ali', 'hatta'],
+      sharjah: ['sharjah', 'khor_fakkan', 'kalba'],
+      ras_al_khaimah: ['ras_al_khaimah'],
+      fujairah: ['fujairah', 'dibba_al_fujairah'],
+      ajman: ['ajman', 'masfout', 'manama'],
+      umm_al_quwain: ['umm_al_quwain'],
     },
   },
-  India: {
+  india: {
     states: {
-      Maharashtra: ['Mumbai', 'Pune', 'Nagpur'],
-      Karnataka: ['Bangalore', 'Mysore', 'Mangalore'],
-      'Tamil Nadu': ['Chennai', 'Coimbatore', 'Madurai'],
+      maharashtra: ['mumbai', 'pune', 'nagpur'],
+      karnataka: ['bangalore', 'mysore', 'mangalore'],
+      tamil_nadu: ['chennai', 'coimbatore', 'madurai'],
     },
   },
-  UK: {
+  uk: {
     states: {
-      England: ['London', 'Manchester', 'Birmingham'],
-      Scotland: ['Edinburgh', 'Glasgow', 'Aberdeen'],
+      england: ['london', 'manchester', 'birmingham'],
+      scotland: ['edinburgh', 'glasgow', 'aberdeen'],
     },
   },
-  USA: {
+  usa: {
     states: {
-      California: ['Los Angeles', 'San Francisco', 'San Diego'],
-      Texas: ['Houston', 'Dallas', 'Austin'],
-      'New York': ['New York City', 'Buffalo', 'Albany'],
+      california: ['los_angeles', 'san_francisco', 'san_diego'],
+      texas: ['houston', 'dallas', 'austin'],
+      new_york: ['new_york_city', 'buffalo', 'albany'],
     },
   },
 };
@@ -85,6 +85,10 @@ export default function CountryStateCity() {
         placeholder={t('form.chooseCountry')}
         options={countries}
         required
+        autoCompleteProps={{
+          getOptionLabel: (_optionLabel) =>
+            _optionLabel ? t(`countryStateCity.${_optionLabel}`) : '',
+        }}
         name="country"
         onChange={(_, newValue) => setValue('country', handleCountryChange(newValue))}
       />
@@ -94,6 +98,10 @@ export default function CountryStateCity() {
         options={states}
         required
         name="state"
+        autoCompleteProps={{
+          getOptionLabel: (_optionLabel) =>
+            _optionLabel ? t(`countryStateCity.${_optionLabel}`) : '',
+        }}
         onChange={(_, newValue) => setValue('state', handleStateChange(newValue))}
       />
       <AutoComplete
@@ -102,6 +110,10 @@ export default function CountryStateCity() {
         options={cities}
         required
         name="city"
+        autoCompleteProps={{
+          getOptionLabel: (_optionLabel) =>
+            _optionLabel ? t(`countryStateCity.${_optionLabel}`) : '',
+        }}
         onChange={(_, newValue) => setValue('city', newValue)}
       />
     </>

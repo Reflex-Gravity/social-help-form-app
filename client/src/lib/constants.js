@@ -8,8 +8,8 @@ const genderOptions = [
 
 const maritialStatusOptions = [
   { label: 'Single', value: 'single' },
-  { label: 'Married', value: 'Married' },
-  { label: 'Divorced', value: 'Divorced' },
+  { label: 'Married', value: 'married' },
+  { label: 'Divorced', value: 'divorced' },
   { label: 'Widowed', value: 'widowed' },
 ];
 

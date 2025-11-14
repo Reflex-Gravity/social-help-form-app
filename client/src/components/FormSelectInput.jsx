@@ -14,10 +14,17 @@ import FormGrid from './FormGrid';
  *   options: Array<{value: string | number, label: string}>,
  *   placeholder?: string,
  *   required: boolean,
- *   selectProps?: import('@mui/material').SelectProps
+ *   labelRenderer: function({ value:string, label:string}):string
  * }} props
  */
-export default function FormSelectInput({ name, placeholder, label, required, options }) {
+export default function FormSelectInput({
+  name,
+  placeholder,
+  label,
+  required,
+  options,
+  labelRenderer,
+}) {
   const {
     control,
     formState: { errors },
@@ -50,7 +57,7 @@ export default function FormSelectInput({ name, placeholder, label, required, op
             )}
             {options.map((option) => (
               <MenuItem key={option.value} value={option.value}>
-                {option.label}
+                {labelRenderer(option)}
               </MenuItem>
             ))}
           </Select>
