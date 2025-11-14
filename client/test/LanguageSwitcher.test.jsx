@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from '../src/components/LanguageSwitcher.jsx';
 import store from '../src/store/store.js';
 import i18n from '../src/i18n/index.js';
-import I18nWrapper from '../src/i18n/i18nWrapper.js';
+import I18nProvider from '../src/i18n/I18nProvider';
 
 // Mock MUI components to avoid ESM transpile issues in Jest
 vi.mock('@mui/material', () => ({
@@ -35,10 +35,10 @@ function NavHomeLabel() {
 function TestWrapper() {
   return (
     <Provider store={store}>
-      <I18nWrapper>
+      <I18nProvider>
         <LanguageSwitcher />
         <NavHomeLabel />
-      </I18nWrapper>
+      </I18nProvider>
     </Provider>
   );
 }
@@ -47,8 +47,6 @@ describe('LanguageSwitcher', () => {
   test('toggles between English and Arabic and updates localStorage', async () => {
     // initial state prepared by setupTests: en + ltr
     render(<TestWrapper />);
-
-    screen.debug();
 
     // If current language is 'en', the button shows 'Arabic'
     expect(screen.getByRole('button', { name: 'العربية' })).toBeInTheDocument();
@@ -60,7 +58,6 @@ describe('LanguageSwitcher', () => {
 
     // English Button should now be available
     await waitFor(() => {
-      screen.debug();
       expect(screen.getByRole('button', { name: 'English' })).toBeInTheDocument();
     });
 
