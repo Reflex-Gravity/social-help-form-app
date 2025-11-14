@@ -27,6 +27,7 @@ import useSocialFormSchema from './social-form/useSocialFormSchema.js';
 import { socialFormSubmitApi } from './social-form/api/socialform.api.js';
 import LanguageSwitcher from '../components/LanguageSwitcher.jsx';
 import clsx from 'clsx';
+import SuccessDialog from './social-form/components/SuccessDialog.jsx';
 
 const FormLeft = lazy(() => import('./social-form/FormLeft.jsx'));
 const SituationDescriptionsForm = lazy(
@@ -109,7 +110,7 @@ export default function FormPage() {
         const formData = form.getValues();
 
         await socialFormSubmitApi({ formData });
-        setSubmitted(true);
+        setSubmitted(`APP-${Math.floor(100000 + Math.random() * 900000)}`);
         reset();
         setActiveStep(0);
         localStorage.setItem(`socialform-activeStep`, 0);
@@ -134,9 +135,14 @@ export default function FormPage() {
   };
 
   const handleReset = useCallback(() => {
+    setActiveStep(0);
     form.clearErrors();
     form.reset();
   }, [form]);
+
+  const handleCloseSubmitPopup = useCallback(() => {
+    setSubmitted(false);
+  }, []);
 
   return (
     <ErrorBoundary>
@@ -177,7 +183,9 @@ export default function FormPage() {
             <Paper className="p-4 border mt-5 border-gray-100 relative" elevation={0}>
               <FormProvider {...form}>
                 <div className="flex flex-1">
-                  {submitted && <Alert severity="success">{t('form.sent')}</Alert>}
+                  {submitted && (
+                    <SuccessDialog applicationNo={submitted} onClose={handleCloseSubmitPopup} />
+                  )}
                 </div>
                 <ErrorAlert />
                 <form onSubmit={onSubmit} onReset={handleReset} className="grid gap-4">

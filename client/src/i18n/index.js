@@ -19,6 +19,7 @@ const resources = {
         changeLang: 'Change Language',
         submit: 'Submit',
         tryAgain: 'Try Again',
+        close: 'Close',
       },
       apiErrors: {
         generic: 'Request Failed',
@@ -73,6 +74,9 @@ const resources = {
         accept: 'Accept',
         regenerate: 'Re-Generate',
         smartHelpTooltip: 'Not sure what to write? Let AI help you.',
+        submitMessage: 'Your form has been submitted successfully.',
+        success: 'Success',
+        applicationNo: 'Application No:',
         errors: {
           generic: 'Please fill the required fields',
           validName: 'Enter a valid name',
@@ -118,7 +122,7 @@ const resources = {
       },
 
       notFound: {
-        title: 'Page not found',
+        title: 'Page Not Found',
         goHome: 'Go Home',
       },
     },

@@ -46,7 +46,7 @@ function App() {
       <SuspenseWrapper>
         <LocalizationProvider
           dateAdapter={AdapterDayjs}
-          adapterLocale="ar"
+          adapterLocale={lang}
           localeText={
             lang === 'ar' ? arSA.components.MuiLocalizationProvider.defaultProps.localeText : null
           }
