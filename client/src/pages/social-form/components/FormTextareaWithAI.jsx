@@ -29,7 +29,8 @@ import i18n from '../../../i18n';
  *   textareaProps?: React.ComponentProps<typeof TextareaAutosize>
  * }} props
  */
-function FormTextareaWithAI({ label, name, placeholder, minRows, maxRows, textareaProps }) {
+
+function FormTextareaWithAI({ label, name, placeholder, minRows, maxRows = 4, textareaProps }) {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [editedContent, setEditedContent] = useState('');

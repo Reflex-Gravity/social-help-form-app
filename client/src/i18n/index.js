@@ -79,6 +79,7 @@ const resources = {
         applicationNo: 'Application No:',
         errors: {
           generic: 'Please fill the required fields',
+          formSubmitFailed: 'Form Submission Failed',
           validName: 'Enter a valid name',
           maxNameChar: 'Name must be at most 100 characters',
           nameRequired: 'Name is Required',
@@ -297,6 +298,7 @@ const resources = {
         applicationNo: 'رقم الطلب:',
         errors: {
           generic: 'يرجى ملء الحقول المطلوبة',
+          formSubmitFailed: 'فشل إرسال النموذج',
           validName: 'أدخل اسمًا صالحًا',
           maxNameChar: 'يجب ألا يتجاوز الاسم 100 حرف',
           nameRequired: 'الاسم مطلوب',

@@ -45,11 +45,23 @@ export async function socialFormSubmitApi({ formData }) {
     if (response.status === 'success' && typeof response.message === 'string') {
       return response.message;
     } else {
-      store.dispatch(showNotification({ message: response.message, severity: 'error' }));
+      store.dispatch(
+        showNotification({
+          title: i18n.t('form.errors.formSubmitFailed'),
+          message: response.message,
+          severity: 'error',
+        }),
+      );
       throw new Error('Error in response');
     }
   } catch (error) {
-    store.dispatch(showNotification({ message: error.message, severity: 'error' }));
+    store.dispatch(
+      showNotification({
+        title: i18n.t('form.errors.formSubmitFailed'),
+        message: error.errorCode,
+        severity: 'error',
+      }),
+    );
     logEvent(LogLevel.error, 'socialFormSubmitApi failed', error);
     throw new Error('Error in response');
   }
