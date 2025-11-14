@@ -2,19 +2,27 @@
 import { describe, test, expect, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEventLib from '@testing-library/user-event';
+import { Provider } from 'react-redux';
 import { I18nextProvider, useTranslation } from 'react-i18next';
+import LanguageSwitcher from '../src/components/LanguageSwitcher.jsx';
+import store from '../src/store/store.js';
 import i18n from '../src/i18n/index.js';
 
 // Mock MUI components to avoid ESM transpile issues in Jest
 vi.mock('@mui/material', () => ({
   Button: ({ onClick, children }) => (
     // minimal stub to simulate a clickable button
-    <button onClick={onClick}>{children}</button>
+    <button role="button" onClick={onClick}>
+      {children}
+    </button>
   ),
   Icon: ({ children }) => <span>{children}</span>,
+  Tooltip: ({ children, title }) => (
+    <div data-testid="tooltip" title={title}>
+      {children}
+    </div>
+  ),
 }));
-
-import LanguageSwitcher from '../src/components/LanguageSwitcher.jsx';
 
 const userEvent = userEventLib.setup();
 
@@ -25,10 +33,12 @@ function NavHomeLabel() {
 
 function TestWrapper() {
   return (
-    <I18nextProvider i18n={i18n}>
-      <LanguageSwitcher />
-      <NavHomeLabel />
-    </I18nextProvider>
+    <Provider store={store}>
+      <I18nextProvider i18n={i18n}>
+        <LanguageSwitcher />
+        <NavHomeLabel />
+      </I18nextProvider>
+    </Provider>
   );
 }
 
