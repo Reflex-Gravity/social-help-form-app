@@ -151,7 +151,6 @@ export default function FormPage() {
           {isDesktop && <FormLeft />}
           <Grid
             size={{ lg: 11, xs: 16 }}
-            overflow={'scroll'}
             height={'100vh'}
             className="bg-gray-100"
             padding={3}
@@ -159,6 +158,7 @@ export default function FormPage() {
             paddingRight={{ xs: 1, lg: 5 }}
             paddingLeft={{ xs: 1, lg: 10 }}
             spacing={3}
+            sx={{ overflowY: 'auto' }}
           >
             <Stack
               direction={'row'}
