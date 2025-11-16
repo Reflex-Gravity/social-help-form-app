@@ -43,7 +43,7 @@ export const inputsCustomizations = {
         boxShadow: 'none',
         borderRadius: (theme.vars || theme).shape.borderRadius,
         textTransform: 'none',
-        [theme.breakpoints.down('md')]: {
+        [theme.breakpoints.down('sm')]: {
           fontSize: '0.8rem',
         },
         variants: [
@@ -300,7 +300,7 @@ export const inputsCustomizations = {
           outline: `3px solid ${alpha(brand[500], 0.5)}`,
           borderColor: brand[400],
         },
-        [theme.breakpoints.down('md')]: {
+        [theme.breakpoints.down('sm')]: {
           fontSize: '0.8rem',
         },
         ...theme.applyStyles('dark', {
@@ -347,7 +347,7 @@ export const inputsCustomizations = {
       root: ({ theme }) => ({
         typography: theme.typography.caption,
         marginBottom: 8,
-        [theme.breakpoints.down('md')]: {
+        [theme.breakpoints.down('sm')]: {
           fontSize: '0.8rem',
         },
       }),
