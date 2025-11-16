@@ -43,6 +43,9 @@ export const inputsCustomizations = {
         boxShadow: 'none',
         borderRadius: (theme.vars || theme).shape.borderRadius,
         textTransform: 'none',
+        [theme.breakpoints.down('md')]: {
+          fontSize: '0.8rem',
+        },
         variants: [
           {
             props: {
@@ -297,6 +300,9 @@ export const inputsCustomizations = {
           outline: `3px solid ${alpha(brand[500], 0.5)}`,
           borderColor: brand[400],
         },
+        [theme.breakpoints.down('md')]: {
+          fontSize: '0.8rem',
+        },
         ...theme.applyStyles('dark', {
           '&:hover': {
             borderColor: gray[500],
@@ -341,6 +347,9 @@ export const inputsCustomizations = {
       root: ({ theme }) => ({
         typography: theme.typography.caption,
         marginBottom: 8,
+        [theme.breakpoints.down('md')]: {
+          fontSize: '0.8rem',
+        },
       }),
     },
   },
