@@ -145,9 +145,14 @@ export const navigationCustomizations = {
   MuiStepLabel: {
     styleOverrides: {
       label: ({ theme }) => ({
-        fontSize: '20px',
-        '&.Mui-active': {
+        fontSize: '16px',
+        [theme.breakpoints.up('lg')]: {
+          fontSize: '16px',
+        },
+        [theme.breakpoints.up('xl')]: {
           fontSize: '20px',
+        },
+        '&.Mui-active': {
           fontWeight: 700,
         },
         '&.Mui-completed': {
