@@ -16,18 +16,16 @@ router.post('/form-submit', async (req, res) => {
   try {
     const { formData } = req.body;
 
-    console.log(req.body);
+    // TODO: more validations here.
     if (!formData.name) {
       return res.status(400).json({ error: 'Invalid payload' });
     }
 
-    return res
-      .status(200)
-      .json({
-        status: 'success',
-        message: 'form submitted',
-        applicationNo: `APP-${Math.floor(100000 + Math.random() * 900000)}`,
-      });
+    return res.status(200).json({
+      status: 'success',
+      message: 'form submitted',
+      applicationNo: `APP-${Math.floor(100000 + Math.random() * 900000)}`,
+    });
   } catch (error) {
     console.error('Error in form-submit', error);
     return res.status(500).json({ error: 'Service Unavailable' });

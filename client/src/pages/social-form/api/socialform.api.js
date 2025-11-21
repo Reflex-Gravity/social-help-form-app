@@ -42,8 +42,8 @@ export async function socialFormSubmitApi({ formData }) {
 
     const response = await fetchController(url, { data: { formData }, timeout: 1000 });
 
-    if (response.status === 'success' && typeof response.message === 'string') {
-      return response.message;
+    if (response.status === 'success' && typeof response.applicationNo === 'string') {
+      return response.applicationNo;
     } else {
       store.dispatch(
         showNotification({

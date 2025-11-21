@@ -108,8 +108,8 @@ export default function FormPage() {
       if (isValid) {
         const formData = form.getValues();
 
-        await socialFormSubmitApi({ formData });
-        setSubmitted(`APP-${Math.floor(100000 + Math.random() * 900000)}`);
+        const applicationNo = await socialFormSubmitApi({ formData });
+        setSubmitted(applicationNo);
         reset();
         setActiveStep(0);
         localStorage.setItem(`socialform-activeStep`, 0);
