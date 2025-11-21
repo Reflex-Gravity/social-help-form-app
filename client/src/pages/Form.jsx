@@ -151,14 +151,14 @@ export default function FormPage() {
           {isDesktop && <FormLeft />}
           <Grid
             size={{ lg: 11, xs: 16 }}
-            overflow={'scroll'}
             height={'100vh'}
             className="bg-gray-100"
             padding={3}
             paddingTop={1}
             paddingRight={{ xs: 1, lg: 5 }}
-            paddingLeft={{ xs: 1, lg: 10 }}
+            paddingLeft={{ xs: 1, md: 3, xl: 10 }}
             spacing={3}
+            sx={{ overflowY: 'auto' }}
           >
             <Stack
               direction={'row'}
@@ -174,7 +174,7 @@ export default function FormPage() {
             <Typography
               marginTop={{ xs: 3, lg: 5 }}
               paddingLeft={1}
-              fontSize={{ xs: 18, sm: 22 }}
+              fontSize={{ xs: 14, sm: 20 }}
               className={clsx('font-semibold', i18n.language === 'ar' ? 'alexandria' : '')}
             >
               {t('form.formInfo')}

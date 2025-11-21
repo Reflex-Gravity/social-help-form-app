@@ -28,7 +28,7 @@ function StepperWrapper({ activeStep }) {
       ) : (
         <Stack flexDirection={'row'} alignItems={'center'}>
           <span className="flex h-3 w-3 rounded-full bg-amber-800" />
-          <Typography marginLeft={1} className="font-bold">
+          <Typography fontSize={{ xs: 14, sm: 20 }} marginLeft={1} className="font-bold">
             {steps[activeStep]}
           </Typography>
         </Stack>

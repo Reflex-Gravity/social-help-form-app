@@ -14,6 +14,7 @@ function I18nProvider({ children }) {
       document.documentElement.dir = direction;
       document.dir = direction;
       document.documentElement.setAttribute('dir', direction);
+      i18n.changeLanguage(lang);
 
       // set arabic locale support for date pickers
       if (lang === 'ar') {
@@ -22,7 +23,6 @@ function I18nProvider({ children }) {
       } else {
         dayjs.locale('en');
       }
-      i18n.changeLanguage(lang);
     }
 
     // configure language
