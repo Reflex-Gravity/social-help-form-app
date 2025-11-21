@@ -138,3 +138,8 @@ cd client && yarn test
   - Ensure `OPENAI_KEY` is set in `server/.env` and the key is valid
 - Yarn not found
   - Install via `npm i -g yarn` and try again
+
+## Improvements
+
+- Increase the coverage of testing.
+- Add authentication layer.

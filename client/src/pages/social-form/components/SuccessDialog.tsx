@@ -39,7 +39,13 @@ export default function SuccessDialog({ onClose, applicationNo }: SuccessDialogP
           <Typography variant="body2" color="text.secondary" textAlign="center">
             {t('form.submitMessage')}
           </Typography>
-          <Typography marginTop={3} variant="body2" color="text.secondary" textAlign="center">
+          <Typography
+            marginTop={3}
+            fontWeight={700}
+            variant="body2"
+            color="text.secondary"
+            textAlign="center"
+          >
             {t('form.applicationNo')} {applicationNo}
           </Typography>
         </Box>
